@@ -17,7 +17,7 @@ const UserList = () => {
 
   return (
     <div className="p-4 bg-gray-800 rounded-md">
-      <h2 className="text-white text-xl mb-2">ユーザー一覧</h2>
+      <h2 className="text-white text-xl mb-2">ユーザー</h2>
       <ul className="space-y-2">
         {users.map((user) => (
           <li key={user.id} className="text-white">

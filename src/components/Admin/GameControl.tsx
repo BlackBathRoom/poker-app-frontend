@@ -13,7 +13,7 @@ const GameControl = () => {
       </button>
       <Modal>
         <ModalFrame modalName="ゲーム管理" closeModal={closeModal}>
-          <GameStartBtn startGame={() => alert("ゲーム開始！")} />
+          <GameStartBtn startGame={() => alert("ゲーム開始")} />
           <GameEndBtn userNames={["Player1", "Player2"]} endGame={(index) => alert(`ゲーム終了: ${index}`)} />
         </ModalFrame>
       </Modal>
