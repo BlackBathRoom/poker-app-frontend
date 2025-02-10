@@ -1,14 +1,14 @@
-import axios , { AxiosRequestConfig, AxiosResponse } from "axios";
-import { API_BASE_URL } from "../config";
+import axios from "axios";
 
-type UserIdResponse = {
-	userId: string;
+const API_URL = "/user";
+
+export const postUserId = async (userId: string): Promise<boolean> => {
+	try {
+		await axios.post(API_URL, { id: userId });
+		return true;
+		}
+	catch (error) {
+		console.error("ユーザーIDの保存に失敗しました:", error);
+		return false;
+		}
 };
-
-export const fetchUserId = async () : promise<string> => {
-	const url = '&{API_BASE_URL}/users/me':
-	const options : AxiosRequestConfig = {
-		url ,
-		method: "Get",
-		withCredentials: true,
-	};
