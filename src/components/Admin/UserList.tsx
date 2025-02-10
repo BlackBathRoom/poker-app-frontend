@@ -1,20 +1,14 @@
-import { useEffect, useState } from "react";
-
 type User = {
-  id: number;
-  name: string;
-  chips: number;
+    id: number;
+    name: string;
+    chips: number;
 };
 
-const UserList = () => {
-  const [users, setUsers] = useState<User[]>([]);
+type Props = {
+    users:User[];
+};
 
-  useEffect(() => {
-    fetch("/api/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, []);
-
+const UserList: React.FC<Props> = ({users}) => {
   return (
     <div className="p-4 bg-gray-800 rounded-md">
       <h2 className="text-white text-xl mb-2">ユーザー</h2>
