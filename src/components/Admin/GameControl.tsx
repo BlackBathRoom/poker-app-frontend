@@ -8,13 +8,15 @@ const GameControl = () => {
 
   return (
     <>
-      <button onClick={openModal} className="bg-blue-600 px-4 py-2 text-white rounded-md">
+      <button 
+        onClick={openModal} 
+        className="bg-blue-600 px-4 py-2 text-white rounded-md w-1/3 mx-auto block">
         ゲーム制御
       </button>
       <Modal>
         <ModalFrame modalName="ゲーム管理" closeModal={closeModal}>
-          <GameStartBtn startGame={() => alert("ゲーム開始")} />
-          <GameEndBtn userNames={["Player1", "Player2"]} endGame={(index) => alert(`ゲーム終了: ${index}`)} />
+            <GameStartBtn startGame={() => alert("ゲーム開始")} />
+            <GameEndBtn userNames={["Player1", "Player2"]} endGame={(index) => alert(`ゲーム終了: ${index}`)} />
         </ModalFrame>
       </Modal>
     </>
