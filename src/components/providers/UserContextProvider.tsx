@@ -9,7 +9,7 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
     const [ id, setId ] = useState<string | null>(null);
 
     return(
-        <UserContext.Provider value={{ id,setId }}>
+        <UserContext.Provider value={{ id, setId }}>
             {children}
         </UserContext.Provider>
     );
