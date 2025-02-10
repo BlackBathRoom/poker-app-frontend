@@ -1,11 +1,11 @@
 import axios , { AxiosRequestConfig, AxiosResponse } from "axios";
-import { API_BASE_URL } from "../config";
+import { API_BASE_URL } from "../../config";
 
 type UserIdResponse = {
 	userId: string;
 };
 
-export const fetchUserId = async () : promise<string> => {
+export const fetchUserId = async () : Promise<string> => {
 	const url = '&{API_BASE_URL}/users/me':
 	const options : AxiosRequestConfig = {
 		url ,

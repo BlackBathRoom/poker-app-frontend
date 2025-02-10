@@ -1,10 +1,9 @@
 import axios from "axios";
-
-const API_URL = "users";
+import { API_BASE_URL } from "../../config";
 
 export const deleteUserid = async (): Promise<boolean> => {
 	try{
-		await axios.delete(API_URL);
+		await axios.delete(API_BASE_URL);
 		return true;
 	}
 	catch (error) {
