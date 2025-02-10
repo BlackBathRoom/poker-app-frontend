@@ -1,12 +1,15 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../config";
 
-export const deleteUserid = async (): Promise<boolean> => {
+const API_URL = `${API_BASE_URL}/users`;
+
+export const deleteUserid = async (userId: string): Promise<boolean> => {
     return axios
-        .delete(API_BASE_URL)
+        .delete(`${API_URL}/${userId}`)
         .then(() => true)
         .catch((error) => {
-            console.error("ユーザーIDの削除に失敗しました:", error);
+            console.error(`ユーザーID (${userId}) の削除に失敗しました:`, error);
             return false;
         });
 };
+
