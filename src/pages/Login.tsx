@@ -1,54 +1,12 @@
 import React, { useState } from "react";
+import InputForm from "../components/InputForm";
+import { useUserContext } from "../hook/useUserContext";
 
-// InputForm コンポーネント
-type InputFormProps = {
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    value: React.InputHTMLAttributes<HTMLInputElement>["value"];
-    placeholder?: string;
-    className?: string;
-    isNumber?: boolean;
-};
 
-const InputForm: React.FC<InputFormProps> = ({
-    onChange,
-    value,
-    placeholder = "",
-    className = "",
-    isNumber = false,
-}) => {
-    const [isError, setIsError] = useState<boolean>(false);
-
-    const numberChecker = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-
-        const inputValue = Number(e.target.value);
-        if (isNaN(inputValue) || inputValue < 0) {
-            setIsError(true);
-            return;
-        }
-
-        setIsError(false);
-        onChange(e);
-    };
-
-    return (
-        <div className="flex flex-col gap-1 w-full h-12">
-            <input
-                type="text"
-                value={value}
-                placeholder={placeholder}
-                onChange={(e) => (isNumber ? numberChecker(e) : onChange(e))}
-                className={`p-2 rounded-md ${className} ${
-                    isError ? "border-red-500" : ""
-                }`}
-            />
-            {isError && <span className="text-red-500">入力値が不正です</span>}
-        </div>
-    );
-};
 
 // LoginPage コンポーネント
 const LoginPage: React.FC = () => {
+    const { setId } = useUserContext();
     const [username, setUsername] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
 

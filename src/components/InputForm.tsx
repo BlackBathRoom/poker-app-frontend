@@ -4,6 +4,7 @@ type Props = {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     value: React.InputHTMLAttributes<HTMLInputElement>["value"];
     formName?: string;
+    placeholder?: string;
     className?: string;
     isNumber?: boolean;
 };
@@ -12,6 +13,7 @@ const InputForm: React.FC<Props> = ({
     onChange,
     value,
     className = "",
+    placeholder = "",
     isNumber = false,
 }) => {
     const [isError, setIsError] = useState<boolean>(false);
@@ -40,6 +42,7 @@ const InputForm: React.FC<Props> = ({
             <input
                 type="text"
                 value={value}
+                placeholder={placeholder}
                 onChange={(e) => isNumber ? numberChecker(e) : onChange(e)}
                 className={`p-1 rounded-md ${className} ${isError ? "border-red-500" : ""}`}
             />
