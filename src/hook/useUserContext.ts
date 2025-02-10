@@ -1,6 +1,6 @@
 import { UserContext, type UserContextType } from "../context/userContext"
 import { useContextClient  } from "./useContextClient"
 
-export const useUserContect = (): UserContextType => {
+export const useUserContext = (): UserContextType => {
     return useContextClient(UserContext);
 };

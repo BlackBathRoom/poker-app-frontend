@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import InputForm from "../components/InputForm";
-import { useUserContect } from "../hook/useUserContect";
+import { useUserContext } from "../hook/useUserContext";
 
 
 
 // LoginPage コンポーネント
 const LoginPage: React.FC = () => {
-    const { setId } = useUserContect();
+    const { setId } = useUserContext();
     const [username, setUsername] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
 
