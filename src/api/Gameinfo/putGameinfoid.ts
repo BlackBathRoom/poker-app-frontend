@@ -1,15 +1,16 @@
 import axios from "axios";
-import { API_BASE_URL, FIXED_GAME_ID } from "../../config"; 
+import { API_BASE_URL } from "../../config";
 
 const API_URL = `${API_BASE_URL}/gameinfo`;
 
-
-export const getGameinfo = async (): Promise<{ pot: number; rate: number; isPlaying: boolean } | null> => {
+export const putGameinfo = async (
+    gameId: string,
+    gameData: Partial<{ pot: number; rate: number; isPlaying: boolean }>
+): Promise<boolean> => {
     return axios
-        .get<{ pot: number; rate: number; isPlaying: boolean }>(`${API_URL}/${FIXED_GAME_ID}`)
-        .then((response) => response.data)
+        .put(`${API_URL}/${gameId}`, gameData)
+        .then(() => true) 
         .catch((error) => {
-            console.error("ゲーム情報の取得に失敗しました:", error);
-            return null;
+            throw new Error(`ゲーム情報の更新に失敗しました: ${error.message}`);
         });
 };
