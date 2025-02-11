@@ -17,8 +17,8 @@ const MainPage: React.FC = () => {
     };
 
     useEffect(() => {
-        document.documentElement.style.overflow = "hidden";
-        document.body.style.overflow = "hidden";
+        document.documentElement.style.overflow = "clip"; // スクロールを防ぐ
+        document.body.style.overflow = "clip";
         return () => {
             document.documentElement.style.overflow = "";
             document.body.style.overflow = "";
@@ -26,7 +26,7 @@ const MainPage: React.FC = () => {
     }, []);
 
     return (
-        <div className="min-h-screen w-screen flex flex-col items-center justify-center overflow-hidden">
+        <div className="h-screen w-full flex flex-col items-center justify-center">
 
             <header className="w-full py-4 bg-black text-center text-2xl font-bold tracking-wider text-white">
                 POKER
@@ -37,16 +37,14 @@ const MainPage: React.FC = () => {
                     <ActionModal action={dummyAction} closeModal={closeModal} />
                 </Modal>
 
-
-                <div className="bg-white text-gray-900 p-8 sm:p-10 md:p-12 rounded-lg shadow-md text-center w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] h-[75vh] flex flex-col gap-8 justify-between">
+                {/* ここを変更せずに維持 */}
+                <div className="bg-white text-gray-900 p-8 sm:p-10 md:p-12 rounded-lg shadow-md text-center w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] flex flex-col gap-8 justify-between">
                     
-
                     <div className="flex justify-around w-full">
                         <GameInfo potSize={256} rate={25600} />
                     </div>
 
-
-                    <div className="mt-[-40px] sm:mt-[-60px] md:mt-[-80px] lg:mt-[-100px]">
+                    <div className="mt-[-50px] sm:mt-[-70px] md:mt-[-90px] lg:mt-[-110px]">
                         <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold">プレイヤー情報</h2>
                         <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
                             ユーザー名: <span className="font-bold text-indigo-600">{userName}</span>
@@ -56,11 +54,11 @@ const MainPage: React.FC = () => {
                         </p>
                     </div>
 
-
                     <div className="w-full flex justify-center">
                         <ActionBtn handleModal={openModal} isPlaying={true} />
                     </div>
                 </div>
+
             </div>
         </div>
     );
