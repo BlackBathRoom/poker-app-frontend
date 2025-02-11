@@ -17,7 +17,7 @@ const MainPage: React.FC = () => {
     };
 
     useEffect(() => {
-        document.documentElement.style.overflow = "clip"; // スクロールを防ぐ
+        document.documentElement.style.overflow = "clip"; 
         document.body.style.overflow = "clip";
         return () => {
             document.documentElement.style.overflow = "";
