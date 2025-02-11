@@ -1,14 +1,11 @@
-type Props = {
-    children: React.ReactNode;
-  };
-  
-  const Header: React.FC<Props> = ({ children }) => {
+const Header: React.FC = () => {
     return (
-      <header className="w-full py-4 bg-black text-center text-2xl font-bold tracking-wider text-white">
-        {children}
+      <header className="w-screen py-4 bg-black text-center text-2xl font-bold tracking-wider text-white">
+        POKER
       </header>
     );
   };
   
   export default Header;
+  
   
