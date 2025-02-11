@@ -5,7 +5,7 @@ interface UserInfoProps {
 
 const UserInfo: React.FC<UserInfoProps> = ({ userName, chips }) => {
     return (
-        <div className="mt-6 sm:mt-8 md:mt-10 lg:mt-12">
+        <div className="">
             <p className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl">
                 ユーザー名: <span className="font-bold text-indigo-600">{userName}</span>
             </p>

@@ -24,21 +24,9 @@ const MainPage: React.FC = () => {
                 <div className="bg-white text-gray-900 p-8 sm:p-10 md:p-12 rounded-lg shadow-md text-center 
                                 w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] 
                                 flex flex-col gap-6 justify-between">
-                    
-                    {/* GameInfo を活用 */}
-                    <div>
-                        <GameInfo potSize={256} rate={25600} />
-                    </div>
-
-                    {/* ユーザー情報（アクションボタンとの距離を確保） */}
-                    <div className="mb-6 sm:mb-8 md:mb-10 lg:mb-12">
-                        <UserInfo userName={userName} chips={chips} />
-                    </div>
-
-                    {/* アクションボタン（下に適切に配置） */}
-                    <div className="w-full flex justify-center">
-                        <ActionBtn handleModal={openModal} isPlaying={true} />
-                    </div>
+                    <GameInfo potSize={256} rate={25600} />
+                    <UserInfo userName={userName} chips={chips} />
+                    <ActionBtn handleModal={openModal} isPlaying={true} />
                 </div>
             </div>
         </div>
