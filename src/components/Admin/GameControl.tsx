@@ -10,7 +10,7 @@ const GameControl = () => {
     <>
       <button 
         onClick={openModal} 
-        className="bg-blue-600 px-4 py-2 text-white rounded-md w-1/3 mx-auto block">
+        className="bg-gray-800 px-4 py-2 text-white rounded-md w-1/3 mx-auto block">
         ゲーム制御
       </button>
       <Modal>
