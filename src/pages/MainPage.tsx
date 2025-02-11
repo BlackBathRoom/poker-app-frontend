@@ -16,17 +16,10 @@ const MainPage: React.FC = () => {
         console.log(actionType, chip);
     };
 
-    useEffect(() => {
-        document.documentElement.style.overflow = "clip"; 
-        document.body.style.overflow = "clip";
-        return () => {
-            document.documentElement.style.overflow = "";
-            document.body.style.overflow = "";
-        };
-    }, []);
+
 
     return (
-        <div className="h-screen w-full flex flex-col items-center justify-center">
+        <div className="h-full w-full flex flex-col items-center justify-center">
 
             <header className="w-full py-4 bg-black text-center text-2xl font-bold tracking-wider text-white">
                 POKER
