@@ -25,7 +25,7 @@ const UserEditModal: React.FC<Props> = ({ closeModal }) => {
   return (
     <ModalFrame modalName="ユーザー編集" closeModal={closeModal}>
       <form 
-        className="flex flex-col items-center space-y-4 w-full max-w-xs sm:max-w-sm md:max-w-md p-4"
+        className="flex flex-col items-center space-y-4 w-full max-w-xs sm:max-w-sm md:max-w-md p-4 text-black"
         onSubmit={handleSubmit}
       >
         <input 
