@@ -40,8 +40,16 @@ const MainPage: React.FC = () => {
                 {/* ここを変更せずに維持 */}
                 <div className="bg-white text-gray-900 p-8 sm:p-10 md:p-12 rounded-lg shadow-md text-center w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] flex flex-col gap-8 justify-between">
                     
+                    {/* Pot と Rate（フォントサイズを最大化） */}
                     <div className="flex justify-around w-full">
-                        <GameInfo potSize={256} rate={25600} />
+                        <div className="text-center">
+                            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-black">Pot</h3>
+                            <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black">256</p>
+                        </div>
+                        <div className="text-center">
+                            <h3 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold text-black">Rate</h3>
+                            <p className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-black">25600</p>
+                        </div>
                     </div>
 
                     <div className="mt-[-50px] sm:mt-[-70px] md:mt-[-90px] lg:mt-[-110px]">
