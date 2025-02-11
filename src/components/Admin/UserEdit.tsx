@@ -28,7 +28,7 @@ const UserEdit = () => {
 
       <Modal>
         <ModalFrame modalName="ユーザー編集" closeModal={closeModal}>
-          <div className="flex flex-col space-y-2">
+          <form className="flex flex-col space-y-2" onSubmit={handleSubmit}>
             <input 
               className="p-2 border" 
               placeholder="名前" 
@@ -42,8 +42,8 @@ const UserEdit = () => {
               value={chips} 
               onChange={(e) => setChips(Number(e.target.value))} 
             />
-            <Btn onClick={handleSubmit}>更新</Btn>
-          </div>
+            <Btn type="submit">更新</Btn>
+          </form>
         </ModalFrame>
       </Modal>
     </>
