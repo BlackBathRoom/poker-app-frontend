@@ -20,8 +20,7 @@ const AdminPage: React.FC = () => {
   // }, []);
 
   return (
-    <div className="p-10 space-y-4 ">
-      <h1 className="text-2xl font-bold text-black text-center">管理者ページ</h1>
+    <div className="p-10">
       <UserList users={users} />
       <GameControl />
     </div>
