@@ -1,11 +1,13 @@
 interface UserInfoProps {
     userName: string;
     chips: number;
-    isParticipating?: boolean;  // 追加（オプションにする）
+    // isPlayingに変更
+    isParticipating?: boolean;  // 追加（オプションにする） <- 何で？
 }
 
 const UserInfo: React.FC<UserInfoProps> = ({ userName, chips, isParticipating = true }) => {  // デフォルト値を設定
     return (
+        // flexコンテナーにしてgap指定で間隔をとる
         <div className="">
             <p className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl">
                 <span className="font-bold text-indigo-600">{userName}</span>
