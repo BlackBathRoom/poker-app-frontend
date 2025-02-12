@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import InputForm from "../components/InputForm";
 import { useUserContext } from "../hook/useUserContext";
+import { postUserInfo } from "../api/postUserInfo";
+import { INITIAL_STATUS } from "../game/initialStatus";
+import { useNavigate } from "react-router-dom";
 
 
 
 // LoginPage コンポーネント
 const LoginPage: React.FC = () => {
-    const { setId } = useUserContext();
+    const { id, setId } = useUserContext();
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -16,7 +21,7 @@ const LoginPage: React.FC = () => {
     };
 
     // フォーム送信時の処理
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!username) {
@@ -24,14 +29,26 @@ const LoginPage: React.FC = () => {
             return;
         }
 
-        if (username !== "admin") {
-            setErrorMessage("ユーザー名が間違っています。");
+        try {
+            const id = await postUserInfo({
+                name: username,
+                chip: INITIAL_STATUS.chip,
+                role: INITIAL_STATUS.role,
+                isPlaying: INITIAL_STATUS.isPlaying,
+            });
+            setId(id);
+        } catch {
+            setErrorMessage("ユーザー情報の登録に失敗しました。");
             return;
-        }
+        };
 
         setErrorMessage("");
         alert("ログイン成功！");
     };
+
+    if (id !== null) {
+        navigate("/main");
+    }
 
     return (
         <div className="max-w-screen-md h-full m-auto flex flex-col gap-10">
