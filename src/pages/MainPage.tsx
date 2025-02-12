@@ -10,7 +10,8 @@ const MainPage: React.FC = () => {
     const { Modal, openModal, closeModal } = useModal();
     const [userName, setUserName] = useState("プレイヤー1");  
     const [chips, setChips] = useState(1000); 
-    const [isParticipating, setIsParticipating] = useState(true);  
+    const [isPlaying, setIsPlaying] = useState(true);
+
 
     const dummyAction = (actionType: ActionType, chip?: number) => {
         console.log(actionType, chip);
@@ -26,7 +27,7 @@ const MainPage: React.FC = () => {
                                 w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] 
                                 flex flex-col gap-6 justify-between">
                     <GameInfo potSize={256} rate={25600} />
-                    <UserInfo userName={userName} chips={chips} isParticipating={isParticipating} />
+                    <UserInfo userName={userName} chips={chips} isPlaying={isPlaying} />
                     <ActionBtn handleModal={openModal} isPlaying={true} />
                 </div>
             </div>
