@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import InputForm from "../components/InputForm";
 import { useUserContext } from "../hook/useUserContext";
+import { postUserInfo } from "../api/postUserInfo";
+import { INITIAL_STATUS } from "../game/initialStatus";
 
 
 
@@ -16,13 +18,27 @@ const LoginPage: React.FC = () => {
     };
 
     // フォーム送信時の処理
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!username) {
             setErrorMessage("ユーザー名を入力してください。");
             return;
         }
+
+        try {
+            const id = await postUserInfo({
+                name: username,
+                chip: INITIAL_STATUS.chip,
+                role: INITIAL_STATUS.role,
+                isPlaying: INITIAL_STATUS.isPlaying,
+            });
+            setId(id);
+        } catch {
+            setErrorMessage("ユーザー情報の登録に失敗しました。");
+            return;
+        };
+
         setErrorMessage("");
         alert("ログイン成功！");
     };
