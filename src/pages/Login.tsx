@@ -3,12 +3,15 @@ import InputForm from "../components/InputForm";
 import { useUserContext } from "../hook/useUserContext";
 import { postUserInfo } from "../api/postUserInfo";
 import { INITIAL_STATUS } from "../game/initialStatus";
+import { useNavigate } from "react-router-dom";
 
 
 
 // LoginPage コンポーネント
 const LoginPage: React.FC = () => {
-    const { setId } = useUserContext();
+    const { id, setId } = useUserContext();
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -42,6 +45,10 @@ const LoginPage: React.FC = () => {
         setErrorMessage("");
         alert("ログイン成功！");
     };
+
+    if (id !== null) {
+        navigate("/main");
+    }
 
     return (
         <div className="max-w-screen-md h-full m-auto flex flex-col gap-10">
