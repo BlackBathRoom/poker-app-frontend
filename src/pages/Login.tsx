@@ -23,12 +23,6 @@ const LoginPage: React.FC = () => {
             setErrorMessage("ユーザー名を入力してください。");
             return;
         }
-
-        if (username !== "admin") {
-            setErrorMessage("ユーザー名が間違っています。");
-            return;
-        }
-
         setErrorMessage("");
         alert("ログイン成功！");
     };
