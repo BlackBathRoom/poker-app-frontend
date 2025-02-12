@@ -10,7 +10,6 @@ const MainPage: React.FC = () => {
     const { Modal, openModal, closeModal } = useModal();
     const [userName, setUserName] = useState("プレイヤー1");  
     const [chips, setChips] = useState(1000); 
-    // isPlayingに変更
     const [isParticipating, setIsParticipating] = useState(true);  
 
     const dummyAction = (actionType: ActionType, chip?: number) => {
@@ -27,8 +26,7 @@ const MainPage: React.FC = () => {
                                 w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] 
                                 flex flex-col gap-6 justify-between">
                     <GameInfo potSize={256} rate={25600} />
-                    {/* isPlayingを引数に指定 */}
-                    <UserInfo userName={userName} chips={chips} /> 
+                    <UserInfo userName={userName} chips={chips} isParticipating={isParticipating} />
                     <ActionBtn handleModal={openModal} isPlaying={true} />
                 </div>
             </div>
