@@ -3,13 +3,14 @@ import ActionBtn from "../components/UserManage/ActionBtn";
 import ActionModal from "../components/UserManage/ActionModal/ActionModal";
 import type { ActionType } from "../game/types";
 import GameInfo from "../components/GameInfo/GameInfo";
-import UserInfo from "../components/Userinformation/UserInfo"; 
+import UserInfo from "../components/Userinformation/UserInfo";
 import { useState } from "react";
 
 const MainPage: React.FC = () => {
     const { Modal, openModal, closeModal } = useModal();
     const [userName, setUserName] = useState("プレイヤー1");  
     const [chips, setChips] = useState(1000);  
+    const [isParticipating, setIsParticipating] = useState(true);  
 
     const dummyAction = (actionType: ActionType, chip?: number) => {
         console.log(actionType, chip);
@@ -25,7 +26,7 @@ const MainPage: React.FC = () => {
                                 w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] 
                                 flex flex-col gap-6 justify-between">
                     <GameInfo potSize={256} rate={25600} />
-                    <UserInfo userName={userName} chips={chips} />
+                    <UserInfo userName={userName} chips={chips} /> 
                     <ActionBtn handleModal={openModal} isPlaying={true} />
                 </div>
             </div>
