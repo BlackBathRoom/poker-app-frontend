@@ -1,9 +1,9 @@
-import { useGetUsers } from "../api/users";
+import { useGetAllUser } from "../api/users";
 import GameInfo from "../components/GameInfo/GameInfo";
 
 
 const Home: React.FC = () => {
-    const { data, isPending, isError } = useGetUsers();
+    const { data, isPending, isError } = useGetAllUser();
 
     if (isPending) {
         return <div>Loading...</div>;
