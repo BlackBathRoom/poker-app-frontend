@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { API_BASE_URL } from "../../config";
-import type { Role, UserInfo } from "../../game/types"
+import type { UserInfo } from "../../game/types"
 import type { UserData } from "./types";
 
 
@@ -69,36 +69,20 @@ export const postUserInfo = async (userInfo: UserInfo): Promise<string> => {
 };
 
 
-const _updateUserInfo = async (
-    userId: string,
-    data: Partial<Pick<UserData, "chip" | "role" | "isplaying">>,
-    resource: string,
-): Promise<void> => {
-    const url = `${URL}/${userId}/${resource}`;
+export const updateUserInfo = async (userId: string, userInfo: Partial<UserInfo>): Promise<void> => {
+    const filteredData: Partial<UserInfo> = Object.fromEntries(
+        Object.entries(userInfo).filter(([, value]) => value !== null && value !== undefined)
+    );
+
+    if (Object.keys(filteredData).length === 0) return;
+
+    const url = `${URL}/${userId}`;
     const options: AxiosRequestConfig = {
         url,
         method: "PUT",
-        data,
+        data: filteredData,
     };
     await axios(options);
-};
-
-const updateChip = async (userId: string, chip: number): Promise<void> => {
-    await _updateUserInfo(userId, { chip }, "chip");
-};
-
-const updateRole = async (userId: string, role: Role | ""): Promise<void> => {
-    await _updateUserInfo(userId, { role: role ? role : null }, "role");
-};
-
-const updateIsPlaying = async (userId: string, isPlaying: boolean): Promise<void> => {
-    await _updateUserInfo(userId, { isplaying: isPlaying }, "isplaying");
-};
-
-export const updateUserInfo = async (userId: string, userInfo: Partial<UserInfo>): Promise<void> => {
-    if (userInfo.chip !== undefined) await updateChip(userId, userInfo.chip);
-    if (userInfo.role !== undefined) await updateRole(userId, userInfo.role);
-    if (userInfo.isPlaying !== undefined) await updateIsPlaying(userId, userInfo.isPlaying);
 };
 
 
