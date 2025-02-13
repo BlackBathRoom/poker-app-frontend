@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { API_BASE_URL } from "../../config";
 import { GameData } from "./types";
 import { GameStatus } from "../../game/types";
@@ -64,42 +64,32 @@ export const putGameInfo = async (gameId: string, gameStatus: GameStatus): Promi
 };
 
 
-const _updataGameInfo = async (
-    gameId: string,
-    data: Partial<GameData>,
-    resource: string,
-): Promise<void> => {
-    const url = `${URL}/${gameId}/${resource}`;
-    const options = {
+
+const _updateGameData = async (userId: string, gameData: Partial<GameData>): Promise<void> => {
+    const filteredData: Partial<GameData> = Object.fromEntries(
+        Object.entries(gameData).filter(([, value]) => value !== null && value !== undefined)
+    );
+
+    if (Object.keys(filteredData).length === 0) return;
+
+    const url = `${URL}/${userId}`;
+    const options: AxiosRequestConfig = {
         url,
         method: "PUT",
-        data,
-        headers: {
-            "Content-Type": "application/json",
-        },
+        data: filteredData,
     };
-    await axios(options)
-        .catch((err) => {
-            throw new Error(err);
-        });
-};
-
-const updatePot = async (gameId: string, pot: number): Promise<void> => {
-    await _updataGameInfo(gameId, { pot }, "pot");
-};
-
-const updateCurrentBet = async (gameId: string, currentBet: number): Promise<void> => {
-    await _updataGameInfo(gameId, { rate: currentBet }, "rate");
-};
-
-const updateIsPlaying = async (gameId: string, isPlaying: boolean): Promise<void> => {
-    await _updataGameInfo(gameId, { isplaying: isPlaying }, "isplaying");
+    await axios(options);
 };
 
 export const updateGameInfo = async (gameId: string, gameStatus: Partial<GameStatus>): Promise<void> => {
-    if (gameStatus.pot !== undefined) await updatePot(gameId, gameStatus.pot);
-    if (gameStatus.currentBet !== undefined) await updateCurrentBet(gameId, gameStatus.currentBet);
-    if (gameStatus.isPlaying !== undefined) await updateIsPlaying(gameId, gameStatus.isPlaying);
+    await _updateGameData(
+        gameId,
+        {
+            pot: gameStatus.pot,
+            rate: gameStatus.currentBet,
+            isplaying: gameStatus.isPlaying
+        }
+    );
 };
 
 
