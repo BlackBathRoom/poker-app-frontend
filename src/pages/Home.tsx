@@ -1,18 +1,15 @@
-import { fetchUserInfo } from "../api/fetchUserInfos";
+import { useGetUsers } from "../api/users";
 import GameInfo from "../components/GameInfo/GameInfo";
-import { useQuery } from "@tanstack/react-query";
+
 
 const Home: React.FC = () => {
-    const { data, isLoading, error } = useQuery({
-        queryKey: [],
-        queryFn: () => fetchUserInfo(),
-    });
+    const { data, isPending, isError } = useGetUsers();
 
-    if (isLoading) {
+    if (isPending) {
         return <div>Loading...</div>;
     }
-    if (error) {
-        return <div>Error: {error.message}</div>;
+    if (isError) {
+        return <div>Error</div>;
     }
     if (!data) {
         return <div>No data</div>;
