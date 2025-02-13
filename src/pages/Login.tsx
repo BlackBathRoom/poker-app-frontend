@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InputForm from "../components/InputForm";
 import { useUserContext } from "../hook/useUserContext";
 import { postUserInfo } from "../api/postUserInfo";
-import { INITIAL_STATUS } from "../game/initialStatus";
+import { INITIAL_USER_STATUS } from "../game/initialStatus";
 import { useNavigate } from "react-router-dom";
 
 
@@ -32,9 +32,9 @@ const LoginPage: React.FC = () => {
         try {
             const id = await postUserInfo({
                 name: username,
-                chip: INITIAL_STATUS.chip,
-                role: INITIAL_STATUS.role,
-                isPlaying: INITIAL_STATUS.isPlaying,
+                chip: INITIAL_USER_STATUS.chip,
+                role: INITIAL_USER_STATUS.role,
+                isPlaying: INITIAL_USER_STATUS.isPlaying,
             });
             setId(id);
         } catch {
