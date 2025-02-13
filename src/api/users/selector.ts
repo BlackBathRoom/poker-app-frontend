@@ -10,3 +10,7 @@ export const userInfoSelector = (data: UserData): UserInfo => {
     };
     return info;
 };
+
+export const userInfosSelector = (data: UserData[]): UserInfo[] => {
+    return data.map((data) => userInfoSelector(data));
+}
