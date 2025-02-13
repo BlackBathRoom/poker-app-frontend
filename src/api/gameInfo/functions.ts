@@ -4,7 +4,7 @@ import { GameData } from "./types";
 import { GameStatus } from "../../game/types";
 
 
-const URL = `${API_BASE_URL}/gameInfo/`;
+const URL = `${API_BASE_URL}/gameinfo`;
 
 export const fetchGameInfo = async (gameId: string): Promise<GameData> => {
     const url = `${URL}/${gameId}`;
@@ -62,7 +62,6 @@ export const putGameInfo = async (gameId: string, gameStatus: GameStatus): Promi
             throw new Error(err);
         });
 };
-
 
 
 const _updateGameData = async (userId: string, gameData: Partial<GameData>): Promise<void> => {
