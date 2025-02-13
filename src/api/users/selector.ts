@@ -11,6 +11,6 @@ export const userInfoSelector = (data: UserData): UserInfo => {
     return info;
 };
 
-export const allUserInfosSelector = (data: UserData[]): UserInfo[] => {
+export const allUserInfoSelector = (data: UserData[]): UserInfo[] => {
     return data.map((data) => userInfoSelector(data));
 }
