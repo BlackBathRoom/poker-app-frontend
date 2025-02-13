@@ -1,7 +1,9 @@
-import { useQuery } from "@tanstack/react-query"
+import { useMutation, useQuery } from "@tanstack/react-query"
 import { usersKeys } from "./key"
-import { fetchAllUserInfo, fetchUserInfo } from "./functions"
+import { fetchAllUserInfo, fetchUserInfo, updateUserInfo } from "./functions"
 import { userInfoSelector, allUserInfoSelector } from "./selector";
+import { UserInfo } from "../../game/types";
+import { queryClient } from "../../main";
 
 
 export const useGetAllUser = () => {
@@ -20,4 +22,16 @@ export const useGetUser = (userId: string) => {
         select: userInfoSelector,
     });
     return { data, isPending, isError };
+};
+
+export const usePutUserInfo = (userId: string) => {
+    const mutation = useMutation({
+        mutationFn: (userInfo: Partial<UserInfo>) => updateUserInfo(userId, userInfo),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: usersKeys.withId(userId),
+            })
+        },
+    });
+    return mutation;
 };
