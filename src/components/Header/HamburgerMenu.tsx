@@ -7,7 +7,7 @@ const HamburgerMenu = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)} 
-        className="fixed top-4 right-4 w-8 h-6 bg-transparent border-none outline-none cursor-pointer z-10"
+        className="fixed top-8 right-4 w-8 h-6 bg-transparent border-none outline-none cursor-pointer z-10"
       >
         <span
           className={`block w-8 h-1 bg-white mb-2 transition-all duration-300 rounded-full ${isOpen ? 'transform rotate-45 translate-y-4' : ''}`}
