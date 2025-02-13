@@ -1,87 +1,75 @@
-import { useMemo, useState, useEffect } from "react";
-import { Game } from "../game/Game";
-import type { GameStatus, ActionType } from "../game/types";
+import { ActionType, UserInfo } from "../game/types"
 
-const demoData = [
-    {
-        name: "hogehoge",
-        chip: 200,
-    },
-    {
-        name: "fugafuga",
-        chip: 200,
-    },
-    {
-        name: "piyopiyo",
-        chip: 200,
-    },
-    {
-        name: "foobar",
-        chip: 200,
-    }
-];
+
+type GameState = {
+    rate: number;
+    potSize: number;
+};
+
+type UserState = {
+    chip: number;
+    amount: number;
+}
+
+type UpdateUserInfo = Partial<Pick<UserInfo, "chip" | "isPlaying">>;
+
+type UpdateGameInfo = Partial<GameState>;
+
+type UpdateInfo = {
+    userInfo: UpdateUserInfo;
+    gameInfo: UpdateGameInfo;
+};
 
 export const useGame = () => {
-    const game = useMemo(() => {
-        const newGame = new Game();
-        demoData.forEach((data) => {
-            newGame.userManager.addUser(data.name, data.chip);
-        });
-        return newGame;
-    }, []);
-    
-    const [gameState, setGameState] = useState<GameStatus>({
-        pot: game.pot,
-        currentBet: game.currentBet,
-    });
-
-    const updateGameState = () => {
-        setGameState({
-            pot: game.pot,
-            currentBet: game.currentBet,
-        });
-    };
-
-    const handleStartGame = () => {
-        game.startGame();
-        updateGameState();
-    };
-
-    const handleNextStep = () => {
-        game.nextStpe();
-        updateGameState();
-    }
-
-    const handleEndGame = (index: number) => {
-        game.endGame(index);
-        updateGameState();
-    }
-
-    const handleAction = (index: number, action: ActionType, amount?: number) => {
-        game.action(index, action, amount);
-        updateGameState();
-    };
-
-    useEffect(() => {
-        const handleBeforeUnload = (e: BeforeUnloadEvent) => {
-            const confirmationMessage = "Oops！\nSessionStrageの実装めんどくてしてないからデータは消えるよ！";
-            e.preventDefault();
-            e.returnValue = confirmationMessage;
-            return confirmationMessage;
+    const action = (actionType: ActionType, gameState: GameState, userState: UserState): UpdateInfo => {
+        switch (actionType) {
+            case "bet":
+                if (userState.amount < gameState.rate) throw new Error("ベット額が足りません");
+                return {
+                    userInfo: { chip: userState.chip - userState.amount },
+                    gameInfo: {
+                        rate: userState.amount,
+                        potSize: gameState.potSize + userState.amount,
+                    },
+                }
+            case "call":
+                if (userState.chip < gameState.rate) throw new Error("コール額が足りません");
+                return {
+                    userInfo: { chip: userState.chip - userState.amount },
+                    gameInfo: {
+                        potSize: gameState.potSize + userState.amount,
+                    },
+                };
+            case "raise":
+                if (userState.amount <= gameState.rate) throw new Error("レイズ額が足りません");
+                return {
+                    userInfo: { chip: userState.chip - userState.amount },
+                    gameInfo: {
+                        rate: userState.amount,
+                        potSize: gameState.potSize + userState.amount,
+                    },
+                };
+            case "all-in":
+                return {
+                    userInfo: { chip: 0 },
+                    gameInfo: {
+                        rate: gameState.rate,
+                        potSize: gameState.potSize + userState.amount,
+                    },
+                } ;
+            case "fold":
+                return {
+                    userInfo: { isPlaying: false },
+                    gameInfo: {},
+                };
+            case "check":
+                return {
+                    userInfo: {},
+                    gameInfo: {},
+                }
+            default:
+                throw new Error("不正なアクションです");
         };
-
-        window.addEventListener("beforeunload", handleBeforeUnload);
-        return () => {
-            window.removeEventListener("beforeunload", handleBeforeUnload);
-        };
-    }, []);
-
-    return {
-        game,
-        gameState,
-        handleStartGame,
-        handleNextStep,
-        handleEndGame,
-        handleAction,
     };
-};
+    return { action };
+}
