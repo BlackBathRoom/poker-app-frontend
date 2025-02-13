@@ -69,9 +69,9 @@ export const postUserInfo = async (userInfo: UserInfo): Promise<string> => {
 };
 
 
-export const updateUserInfo = async (userId: string, userInfo: Partial<UserInfo>): Promise<void> => {
+const _updateUserInfo = async (userId: string, userData: Partial<UserData>): Promise<void> => {
     const filteredData: Partial<UserInfo> = Object.fromEntries(
-        Object.entries(userInfo).filter(([, value]) => value !== null && value !== undefined)
+        Object.entries(userData).filter(([, value]) => value !== null && value !== undefined)
     );
 
     if (Object.keys(filteredData).length === 0) return;
@@ -83,6 +83,18 @@ export const updateUserInfo = async (userId: string, userInfo: Partial<UserInfo>
         data: filteredData,
     };
     await axios(options);
+};
+
+export const updateUserInfo = async (userId: string, userInfo: Partial<UserInfo>): Promise<void> => {
+    await _updateUserInfo(
+        userId,
+        {
+            name: userInfo.name,
+            chip: userInfo.chip,
+            role: userInfo.role === "" ? null : userInfo.role,
+            isplaying: userInfo.isPlaying,
+        }
+    );
 };
 
 
