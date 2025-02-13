@@ -83,15 +83,15 @@ const _updateUserInfo = async (
     await axios(options);
 };
 
-export const updateChip = async (userId: string, chip: number): Promise<void> => {
+const updateChip = async (userId: string, chip: number): Promise<void> => {
     await _updateUserInfo(userId, { chip }, "chip");
 };
 
-export const updateRole = async (userId: string, role: Role | ""): Promise<void> => {
+const updateRole = async (userId: string, role: Role | ""): Promise<void> => {
     await _updateUserInfo(userId, { role: role ? role : null }, "role");
 };
 
-export const updateIsPlaying = async (userId: string, isPlaying: boolean): Promise<void> => {
+const updateIsPlaying = async (userId: string, isPlaying: boolean): Promise<void> => {
     await _updateUserInfo(userId, { isplaying: isPlaying }, "isplaying");
 };
 
@@ -99,4 +99,14 @@ export const updateUserInfo = async (userId: string, userInfo: Partial<UserInfo>
     if (userInfo.chip !== undefined) await updateChip(userId, userInfo.chip);
     if (userInfo.role !== undefined) await updateRole(userId, userInfo.role);
     if (userInfo.isPlaying !== undefined) await updateIsPlaying(userId, userInfo.isPlaying);
+};
+
+
+export const deleteUserInfo = async (userId: string): Promise<void> => {
+    const url = `${URL}/${userId}`;
+    const options: AxiosRequestConfig = {
+        url,
+        method: "DELETE",
+    };
+    await axios(options);
 };
