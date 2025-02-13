@@ -13,7 +13,7 @@ type Props = {
 const UserList: React.FC<Props> = ({ users }) => {
   return (
     <div className="p-4 bg-gray-800 rounded-md max-h-[80%] overflow-y-auto">
-      <h2 className="text-white text-xl mb-2">ユーザー</h2>
+      <h2 className="text-white text-xl text-center mb-2">ユーザー</h2>
       <ul className="flex flex-col gap-2">
         {users.map((user) => (
           <li 
