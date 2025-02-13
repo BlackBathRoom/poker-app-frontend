@@ -62,3 +62,55 @@ export const putGameInfo = async (gameId: string, gameStatus: GameStatus): Promi
             throw new Error(err);
         });
 };
+
+
+const _updataGameInfo = async (
+    gameId: string,
+    data: Partial<GameData>,
+    resource: string,
+): Promise<void> => {
+    const url = `${URL}/${gameId}/${resource}`;
+    const options = {
+        url,
+        method: "PUT",
+        data,
+        headers: {
+            "Content-Type": "application/json",
+        },
+    };
+    await axios(options)
+        .catch((err) => {
+            throw new Error(err);
+        });
+};
+
+const updatePot = async (gameId: string, pot: number): Promise<void> => {
+    await _updataGameInfo(gameId, { pot }, "pot");
+};
+
+const updateCurrentBet = async (gameId: string, currentBet: number): Promise<void> => {
+    await _updataGameInfo(gameId, { rate: currentBet }, "rate");
+};
+
+const updateIsPlaying = async (gameId: string, isPlaying: boolean): Promise<void> => {
+    await _updataGameInfo(gameId, { isplaying: isPlaying }, "isplaying");
+};
+
+export const updateGameInfo = async (gameId: string, gameStatus: Partial<GameStatus>): Promise<void> => {
+    if (gameStatus.pot !== undefined) await updatePot(gameId, gameStatus.pot);
+    if (gameStatus.currentBet !== undefined) await updateCurrentBet(gameId, gameStatus.currentBet);
+    if (gameStatus.isPlaying !== undefined) await updateIsPlaying(gameId, gameStatus.isPlaying);
+};
+
+
+export const deleteGameInfo = async (gameId: string): Promise<void> => {
+    const url = `${URL}/${gameId}`;
+    const options = {
+        url,
+        method: "DELETE",
+    };
+    await axios(options)
+        .catch((err) => {
+            throw new Error(err);
+        });
+};
