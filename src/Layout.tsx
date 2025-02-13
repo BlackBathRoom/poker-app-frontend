@@ -4,7 +4,7 @@ import Header from "./components/Header/Header";
 
 const Layout: React.FC = () => {
     return (
-        <div className="h-svh w-full m-0  bg-sky-200 flex flex-col items-center justify-center">
+        <div className="h-svh w-full m-0  bg-sky-200 flex flex-col items-center justify-center ">
             <div>
                 <Header/>
             </div>

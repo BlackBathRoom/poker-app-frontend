@@ -23,7 +23,7 @@ const UserEditModal: React.FC<Props> = ({ closeModal }) => {
   };
 
   return (
-    <ModalFrame modalName="ユーザー編集" closeModal={closeModal}>
+    <ModalFrame modalName="ユーザー情報変更" closeModal={closeModal}>
       <form 
         className="flex flex-col items-center space-y-4 w-full max-w-xs sm:max-w-sm md:max-w-md p-4 text-black"
         onSubmit={handleSubmit}
@@ -41,7 +41,7 @@ const UserEditModal: React.FC<Props> = ({ closeModal }) => {
           value={chips}
           onChange={(e) => setChips(Number(e.target.value))}
         />
-        <Btn type="submit">更新</Btn>
+        <Btn type="submit">更新↻</Btn>
       </form>
     </ModalFrame>
   );
