@@ -30,7 +30,7 @@ const _fetchUserInfo = async (userId?: string): Promise<UserData[]> => {
 
 export const fetchUserInfo = async (userId: string): Promise<UserData> => {
     const data = await _fetchUserInfo(userId);
-    return await data[0];
+    return data[0];
 };
 
 export const fetchAllUserInfo = async (): Promise<UserData[]> => {
