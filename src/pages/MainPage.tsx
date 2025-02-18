@@ -14,9 +14,7 @@ import { FIXED_GAME_ID } from "../config";
 
 
 const MainPage: React.FC = () => {
-    const { id, setId } = useUserContext();
-    setId("f0691f25-a83a-4090-9b8f-667af15372cc")
-    // 開発用ID
+    const { id } = useUserContext();
     const navigate = useNavigate();
     if (id === null) navigate("/login", { replace: true });
 
@@ -29,10 +27,10 @@ const MainPage: React.FC = () => {
     const game = useGame();
 
     const action = (actionType: ActionType, amount: number) => {
-        if (!userQuery.data) throw new Error("ユーザー情報が取得できません");
+        if (!userQuery.data || !gameQuery.data) throw new Error("ユーザー情報が取得できません");
        const update = game.action(
             actionType,
-            { currentBet: 3, pot: 3 },
+            { currentBet: gameQuery.data.currentBet, pot: gameQuery.data.pot },
             { chip: userQuery.data.chip, amount },
         );
         userMutate.mutate(update.userInfo);
