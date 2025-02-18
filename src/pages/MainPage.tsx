@@ -9,6 +9,8 @@ import ActionBtn from "../components/UserManage/ActionBtn";
 import ActionModal from "../components/UserManage/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
 import UserInfo from "../components/Userinformation/UserInfo";
+import { usePutGameInfo } from "../api/gameInfo";
+import { FIXED_GAME_ID } from "../config";
 
 
 const MainPage: React.FC = () => {
@@ -19,7 +21,8 @@ const MainPage: React.FC = () => {
     if (id === null) navigate("/login", { replace: true });
 
     const { data, isPending, isError } = useGetUser(id as string);
-    const mutate = usePutUserInfo(id as string);
+    const userMutate = usePutUserInfo(id as string);
+    const gameMutate = usePutGameInfo(FIXED_GAME_ID);
 
     const { Modal, openModal, closeModal } = useModal();
     const game = useGame();
@@ -31,7 +34,8 @@ const MainPage: React.FC = () => {
             { rate: 3, potSize: 3 },
             { chip: data.chip, amount },
         );
-        mutate.mutate(update.userInfo);
+        userMutate.mutate(update.userInfo);
+        gameMutate.mutate(update.gameInfo);
     };
 
     if (isPending) return <div>Loading...</div>;
