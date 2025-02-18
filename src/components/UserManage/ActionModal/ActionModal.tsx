@@ -1,13 +1,13 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ModalFrame from "../../Modal/ModalFrame";
 import InputChip from "./InputChip";
 import Actions from "./Actions";
 import { InputAction, NotInputAction } from "./types";
 import { ActionType } from "../../../game/types";
-import { openErrorModalContext } from "../../../hook/useErrorModal";
+import { useErrorModal } from "../../../hook/useErrorModal";
 
 type Props = {
-    action: (actionType: ActionType, chip?: number) => void;
+    action: (actionType: ActionType, amount: number) => void;
     closeModal: () => void;
 };
 
@@ -16,7 +16,7 @@ const ActionModal: React.FC<Props> = ({
     closeModal,
 }) => {
     const [isInputOpen, setIsInputOpen] = useState<InputAction | null>(null);
-    const openErrorModal = useContext(openErrorModalContext)
+    const { setError, openErrorModal} = useErrorModal();
     const openInput = (kind: InputAction) => {
         setIsInputOpen(kind);
     };
@@ -26,11 +26,12 @@ const ActionModal: React.FC<Props> = ({
         closeModal();
     };
 
-    const handleAction = (actionType: ActionType, chip?: number) => {
+    const handleAction = (actionType: ActionType, chip: number) => {
         try {
             action(actionType, chip);
         } catch (error) {
             if (error instanceof Error) {
+                setError(error);
                 openErrorModal(error);
             };
         };
@@ -44,7 +45,7 @@ const ActionModal: React.FC<Props> = ({
     };
 
     const handleNotInputChip = (actionType: NotInputAction) => {
-        handleAction(actionType);
+        handleAction(actionType, 0);
         handleClose();
     };
 

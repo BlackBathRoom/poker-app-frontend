@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import InputForm from "../components/InputForm";
-import { useUserContext } from "../hook/useUserContext";
-import { postUserInfo } from "../api/postUserInfo";
-import { INITIAL_STATUS } from "../game/initialStatus";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useUserContext } from "../hook/useUserContext";
+import { postUserInfo } from "../api/postUserInfo";
+import { INITIAL_USER_STATUS } from "../game/initialStatus";
+import InputForm from "../components/InputForm";
 
 
 // LoginPage コンポーネント
@@ -32,9 +32,7 @@ const LoginPage: React.FC = () => {
         try {
             const id = await postUserInfo({
                 name: username,
-                chip: INITIAL_STATUS.chip,
-                role: INITIAL_STATUS.role,
-                isPlaying: INITIAL_STATUS.isPlaying,
+                ...INITIAL_USER_STATUS,
             });
             setId(id);
         } catch {

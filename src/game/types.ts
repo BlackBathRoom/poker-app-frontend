@@ -11,6 +11,7 @@ export type UserInfo = {
 export type GameStatus = {
     pot: number;
     currentBet: number;
+    isPlaying: boolean;
 };
 
 export type Action = (index: number, action: ActionType, amount?: number) => void
