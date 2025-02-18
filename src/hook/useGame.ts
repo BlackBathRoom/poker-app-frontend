@@ -32,9 +32,9 @@ export const useGame = () => {
             case "call":
                 if (userState.chip < gameState.currentBet) throw new Error("コール額が足りません");
                 return {
-                    userInfo: { chip: userState.chip - userState.amount },
+                    userInfo: { chip: userState.chip - gameState.currentBet },
                     gameInfo: {
-                        pot: gameState.pot + userState.amount,
+                        pot: gameState.pot + gameState.currentBet,
                     },
                 };
             case "raise":
