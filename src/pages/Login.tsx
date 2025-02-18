@@ -32,9 +32,7 @@ const LoginPage: React.FC = () => {
         try {
             const id = await postUserInfo({
                 name: username,
-                chip: INITIAL_USER_STATUS.chip,
-                role: INITIAL_USER_STATUS.role,
-                isPlaying: INITIAL_USER_STATUS.isPlaying,
+                ...INITIAL_USER_STATUS,
             });
             setId(id);
         } catch {
