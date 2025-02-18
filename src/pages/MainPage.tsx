@@ -1,16 +1,16 @@
 import { useModal } from "../components/Modal/useModal";
 import { useNavigate } from "react-router-dom";
 
+import { FIXED_GAME_ID } from "../config";
+import { useGetUser, usePutUserInfo } from "../api/users";
+import { useGetGameInfo, usePutGameInfo } from "../api/gameInfo";
+import { useGame } from "../hook/useGame";
 import { useUserContext } from "../hook/useUserContext";
 import type { ActionType } from "../game/types";
-import { useGetUser, usePutUserInfo } from "../api/users";
-import { useGame } from "../hook/useGame";
 import ActionBtn from "../components/UserManage/ActionBtn";
 import ActionModal from "../components/UserManage/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
 import UserInfo from "../components/Userinformation/UserInfo";
-import { useGetGameInfo, usePutGameInfo } from "../api/gameInfo";
-import { FIXED_GAME_ID } from "../config";
 
 
 const MainPage: React.FC = () => {
