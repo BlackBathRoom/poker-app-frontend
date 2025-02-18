@@ -1,7 +1,7 @@
+import { FIXED_GAME_ID } from "../config";
 import { useGetGameInfo } from "../api/gameInfo";
 import { useGetAllUser } from "../api/users";
 import GameInfo from "../components/GameInfo/GameInfo";
-import { FIXED_GAME_ID } from "../config";
 
 
 const Home: React.FC = () => {

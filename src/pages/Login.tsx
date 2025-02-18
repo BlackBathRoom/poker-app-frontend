@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import InputForm from "../components/InputForm";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import { useUserContext } from "../hook/useUserContext";
 import { postUserInfo } from "../api/postUserInfo";
 import { INITIAL_USER_STATUS } from "../game/initialStatus";
-import { useNavigate } from "react-router-dom";
-
+import InputForm from "../components/InputForm";
 
 
 // LoginPage コンポーネント
