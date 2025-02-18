@@ -5,6 +5,7 @@ import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/Login";
 import { UserContextProvider } from "./components/providers/UserContextProvider";
 import { ErrorModalProvider } from "./components/providers/ErrorModalProvider";
+import AdminPage from "./pages/AdminPage";
 
 const App: React.FC = () => {
     return (
@@ -14,7 +15,8 @@ const App: React.FC = () => {
                     <Route path="/" element={<Layout />}>
                         <Route index element={<Home />} />
                         <Route path="/main" element={<MainPage />} />
-                        <Route path="/login" element={<LoginPage />} />           
+                        <Route path="/login" element={<LoginPage />} />
+                        <Route path="/admin" element={<AdminPage />} />
                     </Route>
                 </Routes>
             </ErrorModalProvider>
