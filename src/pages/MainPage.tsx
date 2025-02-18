@@ -31,7 +31,7 @@ const MainPage: React.FC = () => {
         if (!data) throw new Error("ユーザー情報が取得できません");
        const update = game.action(
             actionType,
-            { rate: 3, potSize: 3 },
+            { currentBet: 3, pot: 3 },
             { chip: data.chip, amount },
         );
         userMutate.mutate(update.userInfo);
