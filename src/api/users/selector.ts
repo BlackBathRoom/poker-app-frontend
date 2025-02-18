@@ -1,5 +1,6 @@
-import type { UserInfo } from "../../game/types";
+import type { UserInfo, UserInfoWithId } from "../../game/types";
 import type { UserData } from "./types";
+
 
 export const userInfoSelector = (data: UserData): UserInfo => {
     const info: UserInfo = {
@@ -13,4 +14,11 @@ export const userInfoSelector = (data: UserData): UserInfo => {
 
 export const allUserInfoSelector = (data: UserData[]): UserInfo[] => {
     return data.map((data) => userInfoSelector(data));
-}
+};
+
+export const allUserInfoWithIdSelector = (data: UserData[]): UserInfoWithId[] => {
+    return data.map((data) => ({
+        id: data["id"],
+        ...userInfoSelector(data),
+    }));
+};
