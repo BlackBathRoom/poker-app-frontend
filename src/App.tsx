@@ -1,11 +1,13 @@
 import { Route, Routes } from "react-router-dom";
+
+import { UserContextProvider } from "./components/providers/UserContextProvider";
+import { ErrorModalProvider } from "./components/providers/ErrorModalProvider";
 import Home from "./pages/Home";
 import Layout from "./Layout";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/Login";
-import { UserContextProvider } from "./components/providers/UserContextProvider";
-import { ErrorModalProvider } from "./components/providers/ErrorModalProvider";
 import AdminPage from "./pages/AdminPage";
+
 
 const App: React.FC = () => {
     return (
