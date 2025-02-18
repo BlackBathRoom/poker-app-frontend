@@ -1,7 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { gameInfoKeys } from "./key";
-import { fetchGameInfo } from "./functions";
+import { fetchGameInfo, updateGameInfo } from "./functions";
 import { gameInfoSelector } from "./selector";
+import { GameStatus } from "../../game/types";
+import { queryClient } from "../../main";
 
 
 export const useGetGameInfo = (gameId: string) => {
@@ -15,4 +17,14 @@ export const useGetGameInfo = (gameId: string) => {
     return { data, isPending, isError };
 };
 
-
+export const usePutGameInfo = (gameId: string) => {
+    const mutation = useMutation({
+        mutationFn: (gameStatus: Partial<GameStatus>) => updateGameInfo(gameId, gameStatus),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: gameInfoKeys.withId(gameId),
+            })
+        }
+    });
+    return mutation;
+};
