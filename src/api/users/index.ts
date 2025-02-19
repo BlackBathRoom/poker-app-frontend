@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 
 import { usersKeys } from "./key"
-import { fetchAllUserInfo, fetchUserInfo, updateUserInfo } from "./functions"
+import { fetchAllUserInfo, fetchUserInfo, updateSelectedUserInfo, updateUserInfo } from "./functions"
 import { userInfoSelector, allUserInfoSelector, allUserInfoWithIdSelector } from "./selector";
 import { UserInfo } from "../../game/types";
 import { queryClient } from "../../main";
@@ -53,9 +53,7 @@ type PutSomeUserInfo = {
 
 export const usePutSelectedUserInfo = () => {
     const mutation = useMutation({
-        mutationFn: async ({ ids, userInfo }: PutSomeUserInfo) => {
-            ids.forEach((id) => updateUserInfo(id, userInfo));
-        },
+        mutationFn: ({ ids, userInfo }: PutSomeUserInfo) => updateSelectedUserInfo(ids, userInfo),
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: usersKeys.allWithId(),
