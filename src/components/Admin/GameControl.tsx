@@ -17,6 +17,16 @@ const GameControl: React.FC<Props> = ({
     endGame,
 }) => {
     const { Modal, openModal, closeModal } = useModal();
+    
+    const handleStart = () => {
+        startGame();
+        closeModal();
+    };
+
+    const handleEnd = (id: string) => {
+        endGame(id);
+        closeModal();
+    };
 
     return (
         <>
@@ -27,8 +37,8 @@ const GameControl: React.FC<Props> = ({
         </button>
         <Modal>
             <ModalFrame modalName="ゲーム管理" closeModal={closeModal}>
-                <GameStartBtn startGame={startGame} />
-                <GameEndBtn users={users} endGame={endGame} />
+                <GameStartBtn startGame={handleStart} />
+                <GameEndBtn users={users} endGame={handleEnd} />
             </ModalFrame>
         </Modal>
         </>
