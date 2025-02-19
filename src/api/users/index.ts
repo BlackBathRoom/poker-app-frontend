@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
+
 import { usersKeys } from "./key"
 import { fetchAllUserInfo, fetchUserInfo, updateUserInfo } from "./functions"
-import { userInfoSelector, allUserInfoSelector } from "./selector";
+import { userInfoSelector, allUserInfoSelector, allUserInfoWithIdSelector } from "./selector";
 import { UserInfo } from "../../game/types";
 import { queryClient } from "../../main";
 
@@ -34,4 +35,13 @@ export const usePutUserInfo = (userId: string) => {
         },
     });
     return mutation;
+};
+
+export const useGetAllUserWithId = () => {
+    const { data, isPending, isError } = useQuery({
+        queryKey: usersKeys.allWithId(),
+        queryFn: () => fetchAllUserInfo(),
+        select: allUserInfoWithIdSelector,
+    });
+    return { data, isPending, isError };
 };
