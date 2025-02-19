@@ -9,7 +9,7 @@ import { queryClient } from "../../main";
 export const useGetGameInfo = (gameId: string) => {
     const { data, isPending, isError } = useQuery(
         {
-            queryKey: gameInfoKeys.withId(gameId),
+            queryKey: gameInfoKeys.id(gameId),
             queryFn: () => fetchGameInfo(gameId),
             select: gameInfoSelector,
         },
@@ -22,7 +22,7 @@ export const usePutGameInfo = (gameId: string) => {
         mutationFn: (gameStatus: Partial<GameStatus>) => updateGameInfo(gameId, gameStatus),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: gameInfoKeys.withId(gameId),
+                queryKey: gameInfoKeys.id(gameId),
             })
         }
     });

@@ -17,7 +17,7 @@ export const useGetAllUser = () => {
 
 export const useGetUser = (userId: string) => {
     const { data, isPending, isError } = useQuery({
-        queryKey: usersKeys.withId(userId),
+        queryKey: usersKeys.id(userId),
         queryFn: () => fetchUserInfo(userId),
         select: userInfoSelector,
     });
@@ -29,7 +29,7 @@ export const usePutUserInfo = (userId: string) => {
         mutationFn: (userInfo: Partial<UserInfo>) => updateUserInfo(userId, userInfo),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: usersKeys.withId(userId),
+                queryKey: usersKeys.id(userId),
             })
         },
     });
