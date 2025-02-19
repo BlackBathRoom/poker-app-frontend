@@ -66,7 +66,7 @@ export const putGameInfo = async (gameId: string, gameStatus: GameStatus): Promi
 
 const _updateGameData = async (userId: string, gameData: Partial<GameData>): Promise<void> => {
     const filteredData: Partial<GameData> = Object.fromEntries(
-        Object.entries(gameData).filter(([, value]) => value !== null && value !== undefined)
+        Object.entries(gameData).filter(([, value]) => value !== undefined)
     );
 
     if (Object.keys(filteredData).length === 0) return;
