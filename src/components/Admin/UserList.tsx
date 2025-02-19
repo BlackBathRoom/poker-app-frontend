@@ -1,10 +1,6 @@
-import { UserInfo } from "../../game/types";
+import type { UserInfo, UserInfoWithId } from "../../game/types";
 import UserEdit from "./UserEdit";
 
-
-type UserInfoWithId = {
-    id: string;
-} & UserInfo;
 
 type Props = {
     users: UserInfoWithId[];
