@@ -45,3 +45,22 @@ export const useGetAllUserWithId = () => {
     });
     return { data, isPending, isError };
 };
+
+type PutSomeUserInfo = {
+    ids: string[];
+    userInfo: Partial<UserInfo>;
+}
+
+export const usePutSelectedUserInfo = () => {
+    const mutation = useMutation({
+        mutationFn: async ({ ids, userInfo }: PutSomeUserInfo) => {
+            ids.forEach((id) => updateUserInfo(id, userInfo));
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: usersKeys.allWithId(),
+            })
+        },
+    });
+    return mutation;
+};
