@@ -32,10 +32,14 @@ const AdminPage: React.FC = () => {
 
     const endGame = (id: string) => {
         if (!userQuery.data || !gameQuery.data) return;
-        userMutate.mutate({
-            ids: [id],
-            userInfo: { chip: gameQuery.data.pot },
-        });
+
+        const winnerPrevChip = userQuery.data.find((user) => user.id === id)?.chip;
+        if (winnerPrevChip) {
+            userMutate.mutate({
+                ids: [id],
+                userInfo: { chip: winnerPrevChip + gameQuery.data.pot },
+            });
+        }
 
         userMutate.mutate({
             ids: userQuery.data.map((user) => user.id),
