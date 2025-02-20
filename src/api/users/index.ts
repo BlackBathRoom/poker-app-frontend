@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
+
 import { usersKeys } from "./key"
-import { fetchAllUserInfo, fetchUserInfo, updateUserInfo } from "./functions"
-import { userInfoSelector, allUserInfoSelector } from "./selector";
-import { UserInfo } from "../../game/types";
+import { fetchAllUserInfo, fetchUserInfo, updateSelectedUserInfo, updateUserInfo } from "./functions"
+import { userInfoSelector, allUserInfoSelector, allUserInfoWithIdSelector } from "./selector";
+import type { UserInfo } from "../../game/types";
 import { queryClient } from "../../main";
 
 
@@ -17,7 +18,7 @@ export const useGetAllUser = () => {
 
 export const useGetUser = (userId: string) => {
     const { data, isPending, isError } = useQuery({
-        queryKey: usersKeys.withId(userId),
+        queryKey: usersKeys.id(userId),
         queryFn: () => fetchUserInfo(userId),
         select: userInfoSelector,
     });
@@ -29,7 +30,33 @@ export const usePutUserInfo = (userId: string) => {
         mutationFn: (userInfo: Partial<UserInfo>) => updateUserInfo(userId, userInfo),
         onSuccess: () => {
             queryClient.invalidateQueries({
-                queryKey: usersKeys.withId(userId),
+                queryKey: usersKeys.id(userId),
+            })
+        },
+    });
+    return mutation;
+};
+
+export const useGetAllUserWithId = () => {
+    const { data, isPending, isError } = useQuery({
+        queryKey: usersKeys.allWithId(),
+        queryFn: () => fetchAllUserInfo(),
+        select: allUserInfoWithIdSelector,
+    });
+    return { data, isPending, isError };
+};
+
+type PutSomeUserInfo = {
+    ids: string[];
+    userInfo: Partial<UserInfo>;
+}
+
+export const usePutSelectedUserInfo = () => {
+    const mutation = useMutation({
+        mutationFn: ({ ids, userInfo }: PutSomeUserInfo) => updateSelectedUserInfo(ids, userInfo),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: usersKeys.allWithId(),
             })
         },
     });

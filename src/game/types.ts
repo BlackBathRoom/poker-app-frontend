@@ -8,10 +8,14 @@ export type UserInfo = {
     isPlaying: boolean;
 };
 
+export type UserInfoWithId = {
+    id: string
+} & UserInfo;
+
 export type GameStatus = {
     pot: number;
     currentBet: number;
     isPlaying: boolean;
 };
 
-export type Action = (index: number, action: ActionType, amount?: number) => void
+export type Action = (index: number, action: ActionType, amount?: number) => void;

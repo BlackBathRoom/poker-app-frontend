@@ -40,7 +40,7 @@ const InputForm: React.FC<Props> = ({
     return (
         <div className="flex flex-col gap-1 w-full h-12">
             <input
-                type="text"
+                type={isNumber ? "number" : "text"}
                 value={value}
                 placeholder={placeholder}
                 onChange={(e) => isNumber ? numberChecker(e) : onChange(e)}

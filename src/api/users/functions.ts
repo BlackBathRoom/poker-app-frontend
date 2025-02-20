@@ -1,4 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
+
 import { API_BASE_URL } from "../../config";
 import type { UserInfo } from "../../game/types"
 import type { UserData } from "./types";
@@ -43,7 +45,7 @@ type PostResponse = {
 }
 
 export const postUserInfo = async (userInfo: UserInfo): Promise<string> => {
-    const data: UserData = {
+    const data: Omit<UserData, "id"> = {
         name: userInfo.name,
         chip: userInfo.chip,
         role: userInfo.role === "" ? null : userInfo.role,
@@ -70,8 +72,8 @@ export const postUserInfo = async (userInfo: UserInfo): Promise<string> => {
 
 
 const _updateUserInfo = async (userId: string, userData: Partial<UserData>): Promise<void> => {
-    const filteredData: Partial<UserInfo> = Object.fromEntries(
-        Object.entries(userData).filter(([, value]) => value !== null && value !== undefined)
+    const filteredData: Partial<Omit<UserData, "id">> = Object.fromEntries(
+        Object.entries(userData).filter(([, value]) => value !== undefined)
     );
 
     if (Object.keys(filteredData).length === 0) return;
@@ -95,6 +97,10 @@ export const updateUserInfo = async (userId: string, userInfo: Partial<UserInfo>
             isplaying: userInfo.isPlaying,
         }
     );
+};
+
+export const updateSelectedUserInfo = async (userIds: string[], userInfo: Partial<UserInfo>): Promise<void> => {
+    await Promise.all(userIds.map((userId) => updateUserInfo(userId, userInfo)));
 };
 
 

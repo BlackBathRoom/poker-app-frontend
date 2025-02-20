@@ -1,5 +1,5 @@
-import { GameStatus } from "../../game/types";
-import { GameData } from "./types";
+import type { GameStatus } from "../../game/types";
+import type { GameData } from "./types";
 
 
 export const gameInfoSelector = (data: GameData): GameStatus => {

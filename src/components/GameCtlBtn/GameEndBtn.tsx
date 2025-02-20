@@ -1,20 +1,20 @@
-import Btn from "../Btn";
 import { useModal } from "../Modal/useModal";
+import type { UserInfoWithId } from "../../game/types";
+import Btn from "../Btn";
 import WinnerModal from "./WinnerModal/WinnerModal";
 
+
 type Props = {
-    userNames: string[];
-    endGame: (index: number) => void;
+    users: Pick<UserInfoWithId, "id" | "name">[];
+    endGame: (id: string) => void;
 };
 
-const GameEndBtn: React.FC<Props> = ({ userNames, endGame }) => {
+const GameEndBtn: React.FC<Props> = ({ users, endGame }) => {
     const { openModal, closeModal, Modal } = useModal();
-
-    const handleEndGame = (index: number) => {
-        endGame(index);
+    const handleEndGame = (id: string) => {
+        endGame(id);
         closeModal();
     };
-
 
     return (
         <>
@@ -29,7 +29,7 @@ const GameEndBtn: React.FC<Props> = ({ userNames, endGame }) => {
         </Btn>
         <Modal>
             <WinnerModal
-                userNames={userNames}
+                users={users}
                 endGame={handleEndGame}
                 closeModal={closeModal}
             />

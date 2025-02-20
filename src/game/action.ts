@@ -49,8 +49,8 @@ export const action = (actionType: ActionType, gameState: GameState, userState: 
             return {
                 userInfo: { chip: 0 },
                 gameInfo: {
-                    currentBet: gameState.currentBet,
-                    pot: gameState.pot + userState.amount,
+                    currentBet: userState.chip,
+                    pot: gameState.pot + userState.chip,
                 },
             } ;
         case "fold":
