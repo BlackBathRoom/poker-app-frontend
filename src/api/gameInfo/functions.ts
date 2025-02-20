@@ -1,14 +1,16 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
+
 import { API_BASE_URL } from "../../config";
-import { GameData } from "./types";
-import { GameStatus } from "../../game/types";
+import type { GameData } from "./types";
+import type { GameStatus } from "../../game/types";
 
 
 const URL = `${API_BASE_URL}/gameinfo`;
 
 export const fetchGameInfo = async (gameId: string): Promise<GameData> => {
     const url = `${URL}/${gameId}`;
-    const options = {
+    const options: AxiosRequestConfig = {
         url,
         method: "GET",
     };
@@ -25,7 +27,7 @@ type PostResponse = {
 };
 
 export const postGameInfo = async (gameInfo: GameData): Promise<string> => {
-    const options = {
+    const options: AxiosRequestConfig = {
         url: URL,
         method: "POST",
         data: gameInfo,
@@ -49,7 +51,7 @@ export const putGameInfo = async (gameId: string, gameStatus: GameStatus): Promi
         isplaying: gameStatus.isPlaying,
     };
 
-    const options = {
+    const options: AxiosRequestConfig = {
         url,
         method: "PUT",
         data,
@@ -94,7 +96,7 @@ export const updateGameInfo = async (gameId: string, gameStatus: Partial<GameSta
 
 export const deleteGameInfo = async (gameId: string): Promise<void> => {
     const url = `${URL}/${gameId}`;
-    const options = {
+    const options: AxiosRequestConfig = {
         url,
         method: "DELETE",
     };
