@@ -2,6 +2,7 @@ import { useState } from "react";
 import ModalFrame from "../Modal/ModalFrame";
 import Btn from "../Btn";
 import { UserInfo } from "../../game/types";
+import InputForm from "../InputForm";
 
 type Props = {
     userInfo: Pick<UserInfo, "name" | "chip">;
@@ -24,14 +25,13 @@ const UserEditModal: React.FC<Props> = ({ userInfo, updateUserInfo, closeModal }
                 className="flex flex-col items-center space-y-4 w-full max-w-xs sm:max-w-sm md:max-w-md p-4 text-black"
                 onSubmit={handleSubmit}
             >
-                <input 
-                className="w-full p-2 border border-gray-300 rounded-md"
-                type="number"
-                placeholder="チップ"
-                value={chips}
-                onChange={(e) => setChips(Number(e.target.value))}
+                <InputForm
+                    placeholder="チップ"
+                    value={chips}
+                    onChange={(e) => setChips(Number(e.target.value))}
+                    isNumber
                 />
-                <Btn type="submit">更新↻</Btn>
+                <Btn type="submit" className="px-4 py-2">更新↻</Btn>
             </form>
         </ModalFrame>
     );
