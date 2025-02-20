@@ -1,6 +1,6 @@
-import { UserInfoWithId } from "../../game/types";
-import Btn from "../Btn";
 import { useModal } from "../Modal/useModal";
+import type { UserInfoWithId } from "../../game/types";
+import Btn from "../Btn";
 import WinnerModal from "./WinnerModal/WinnerModal";
 
 

@@ -1,4 +1,4 @@
-import { UserInfoWithId } from "../../../game/types";
+import type { UserInfoWithId } from "../../../game/types";
 import Btn from "../../Btn";
 import ModalFrame from "../../Modal/ModalFrame";
 

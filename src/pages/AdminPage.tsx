@@ -1,10 +1,9 @@
-import UserList from "../components/Admin/UserList";
-import GameControl from "../components/Admin/GameControl";
 import { useGetAllUserWithId, usePutSelectedUserInfo } from "../api/users";
-import { UserInfo } from "../game/types";
 import { useGetGameInfo, usePutGameInfo } from "../api/gameInfo";
 import { FIXED_GAME_ID } from "../config";
-
+import type { UserInfo } from "../game/types";
+import UserList from "../components/Admin/UserList";
+import GameControl from "../components/Admin/GameControl";
 
 const AdminPage: React.FC = () => {
     const userQuery = useGetAllUserWithId();

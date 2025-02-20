@@ -1,7 +1,8 @@
 import { useState } from "react";
+
+import type { UserInfo } from "../../game/types";
 import ModalFrame from "../Modal/ModalFrame";
 import Btn from "../Btn";
-import { UserInfo } from "../../game/types";
 import InputForm from "../InputForm";
 
 type Props = {

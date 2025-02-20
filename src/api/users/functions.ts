@@ -1,4 +1,6 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios from "axios";
+import type { AxiosRequestConfig, AxiosResponse } from "axios";
+
 import { API_BASE_URL } from "../../config";
 import type { UserInfo } from "../../game/types"
 import type { UserData } from "./types";

@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
+
 import { gameInfoKeys } from "./key";
 import { fetchGameInfo, updateGameInfo } from "./functions";
 import { gameInfoSelector } from "./selector";
-import { GameStatus } from "../../game/types";
+import type { GameStatus } from "../../game/types";
 import { queryClient } from "../../main";
 
 

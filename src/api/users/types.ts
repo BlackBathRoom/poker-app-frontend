@@ -1,4 +1,4 @@
-import { Role } from "../../game/types";
+import type { Role } from "../../game/types";
 
 export interface UserData {
     id: string;

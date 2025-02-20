@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query"
 import { usersKeys } from "./key"
 import { fetchAllUserInfo, fetchUserInfo, updateSelectedUserInfo, updateUserInfo } from "./functions"
 import { userInfoSelector, allUserInfoSelector, allUserInfoWithIdSelector } from "./selector";
-import { UserInfo } from "../../game/types";
+import type { UserInfo } from "../../game/types";
 import { queryClient } from "../../main";
 
 
