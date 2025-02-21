@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query"
 
+import { USER_INFO_FETCH_INTERVAL, USERS_INFO_FETCH_INTERVAL } from "../constant";
 import { usersKeys } from "./key"
 import { fetchAllUserInfo, fetchUserInfo, updateSelectedUserInfo, updateUserInfo } from "./functions"
 import { userInfoSelector, allUserInfoSelector, allUserInfoWithIdSelector } from "./selector";
@@ -12,6 +13,7 @@ export const useGetAllUser = () => {
         queryKey: usersKeys.all,
         queryFn: () => fetchAllUserInfo(),
         select: allUserInfoSelector,
+        refetchInterval: USERS_INFO_FETCH_INTERVAL,
     });
     return { data, isPending, isError };
 };
@@ -21,6 +23,7 @@ export const useGetUser = (userId: string) => {
         queryKey: usersKeys.id(userId),
         queryFn: () => fetchUserInfo(userId),
         select: userInfoSelector,
+        refetchInterval: USER_INFO_FETCH_INTERVAL,
     });
     return { data, isPending, isError };
 };
@@ -42,6 +45,7 @@ export const useGetAllUserWithId = () => {
         queryKey: usersKeys.allWithId(),
         queryFn: () => fetchAllUserInfo(),
         select: allUserInfoWithIdSelector,
+        refetchInterval: USERS_INFO_FETCH_INTERVAL,
     });
     return { data, isPending, isError };
 };
