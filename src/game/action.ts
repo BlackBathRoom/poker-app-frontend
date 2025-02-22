@@ -1,21 +1,5 @@
-import { ActionType, GameStatus, UserInfo } from "./types";
+import { ActionType, GameState, UpdateInfo, UserState } from "./types";
 
-
-type GameState = Pick<GameStatus, "currentBet" | "pot">;
-
-type UserState = {
-    chip: number;
-    amount: number;
-}
-
-type UpdateUserInfo = Partial<Pick<UserInfo, "chip" | "isPlaying">>;
-
-type UpdateGameInfo = Partial<GameState>;
-
-type UpdateInfo = {
-    userInfo: UpdateUserInfo;
-    gameInfo: UpdateGameInfo;
-};
 
 export const action = (actionType: ActionType, gameState: GameState, userState: UserState): UpdateInfo => {
     switch (actionType) {
