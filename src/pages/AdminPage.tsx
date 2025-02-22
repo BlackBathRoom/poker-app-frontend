@@ -30,6 +30,11 @@ const AdminPage: React.FC = () => {
         gameMutate.mutate({ "isPlaying": true });
     };
 
+    const nextStep = () => {
+        if (!userQuery.data || !gameQuery.data) return;
+        gameMutate.mutate({ currentBet: 0 });
+    };
+
     const endGame = (id: string) => {
         if (!userQuery.data || !gameQuery.data) return;
 
@@ -62,8 +67,8 @@ const AdminPage: React.FC = () => {
                         name: user.name,
                     }))
                 }
-                startGame={startGame}
-                endGame={endGame}
+                isPlaying={gameQuery.data.isPlaying}
+                gameControlFn={{ startGame, nextStep, endGame }}
             />
         </div>
     );
