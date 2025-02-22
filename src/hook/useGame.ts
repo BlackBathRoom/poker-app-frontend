@@ -1,7 +1,7 @@
 import { useGetGameInfo, usePutGameInfo } from "../api/gameInfo";
 import { useGetUser, usePutUserInfo } from "../api/users";
 import { action as actionFunc } from "../game/action";
-import { ActionType } from "../game/types";
+import type { ActionType } from "../game/types";
 
 
 export const useGame = (userId: string, gameId: string) => {
