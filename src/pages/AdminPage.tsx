@@ -27,7 +27,7 @@ const AdminPage: React.FC = () => {
             ids: userQuery.data.map((user) => user.id),
             userInfo: { isPlaying: true },
         });
-        gameMutate.mutate({ "isPlaying": true });
+        gameMutate.mutate({ isPlaying: true });
     };
 
     const nextStep = () => {
@@ -51,9 +51,9 @@ const AdminPage: React.FC = () => {
             userInfo: { isPlaying: false },
         });
         gameMutate.mutate({
-            "currentBet": 0,
-            "pot": 0,
-            "isPlaying": false,
+            currentBet: 0,
+            pot: 0,
+            isPlaying: false,
         });
     };
 
