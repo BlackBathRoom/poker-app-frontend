@@ -42,7 +42,6 @@ const GameControl: React.FC<Props> = ({
         </button>
         <Modal>
             <ModalFrame modalName="ゲーム管理" closeModal={closeModal}>
-                <GameStartBtn startGame={handleStart} />
                 {isPlaying ? (
                     <NextStepBtn nextStep={nextStep} />
                 ): (
