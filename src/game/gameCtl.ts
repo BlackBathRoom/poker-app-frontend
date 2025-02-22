@@ -17,14 +17,14 @@ export const nextStep = (): UpdateInfo => {
 
 type Return = {
     winnerData: UpdateInfo["userInfo"];
-    loserData: UpdateInfo["userInfo"];
+    commonData: UpdateInfo["userInfo"];
     gameStatus: UpdateInfo["gameInfo"];
 };
 
-export const endGame = (winnerData: UserInfo, gameState: GameState): Return => {
+export const endGame = (gameState: GameState, winnerData?: UserInfo): Return => {
     return {
-        winnerData: { chip: winnerData.chip + gameState.pot },
-        loserData: { isPlaying: false },
+        winnerData: winnerData ? { chip: winnerData.chip + gameState.pot } : {},
+        commonData: { isPlaying: false },
         gameStatus: { currentBet: 0, pot: 0, isPlaying: false },
     };
 };
