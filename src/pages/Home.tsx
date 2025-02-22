@@ -2,6 +2,7 @@ import { FIXED_GAME_ID } from "../config";
 import { useGetGameInfo } from "../api/gameInfo";
 import { useGetAllUser } from "../api/users";
 import GameInfo from "../components/GameInfo/GameInfo";
+import Loading from "../components/Loading/Loading";
 
 
 const Home: React.FC = () => {
@@ -9,7 +10,7 @@ const Home: React.FC = () => {
     const gameInfoQuery = useGetGameInfo(FIXED_GAME_ID);
 
     if (userQuery.isPending || gameInfoQuery.isPending) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
     if (userQuery.isError || gameInfoQuery.isError) {
         return <div>Error</div>;
