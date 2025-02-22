@@ -14,7 +14,7 @@ const Header: React.FC = () => {
         <HamburgerMenu isOpen={isOpen} setIsOpen={setIsOpen} />
       </div>
     </div>
-    <SideMenu isOpen={isOpen} />
+    <SideMenu isOpen={isOpen} closeMenu={() => setIsOpen(false)} />
     </>
   );
 };
