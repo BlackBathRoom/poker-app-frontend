@@ -4,11 +4,11 @@ import Header from "./components/Header/Header";
 
 const Layout: React.FC = () => {
     return (
-        <div className="h-svh w-full m-0  bg-sky-200 flex flex-col items-center justify-center ">
-            <div>
+        <div className="h-dvh w-screen bg-sky-200 flex flex-col">
+            <div className="w-full">
                 <Header/>
             </div>
-            <div className="flex-grow w-full px-2 py-3">
+            <div className="flex-grow w-full h-fit px-2 py-3">
                 <Outlet />
             </div>
         </div>
