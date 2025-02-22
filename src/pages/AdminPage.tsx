@@ -4,6 +4,7 @@ import { FIXED_GAME_ID } from "../config";
 import type { UserInfo } from "../game/types";
 import UserList from "../components/Admin/UserList";
 import GameControl from "../components/Admin/GameControl";
+import Loading from "../components/Loading/Loading";
 
 const AdminPage: React.FC = () => {
     const userQuery = useGetAllUserWithId();
@@ -12,7 +13,7 @@ const AdminPage: React.FC = () => {
     const userMutate = usePutSelectedUserInfo();
     const gameMutate = usePutGameInfo(FIXED_GAME_ID);
 
-    if (userQuery.isPending || gameQuery.isPending) return <div>Loading...</div>;
+    if (userQuery.isPending || gameQuery.isPending) return <Loading />
     if (userQuery.isError || gameQuery.isError) return <div>Error</div>;
     if (!userQuery.data || !gameQuery.data) return <div>No data</div>;
 

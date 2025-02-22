@@ -11,6 +11,7 @@ import ActionBtn from "../components/UserManage/ActionBtn";
 import ActionModal from "../components/UserManage/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
 import UserInfo from "../components/Userinformation/UserInfo";
+import Loading from "../components/Loading/Loading";
 
 
 const MainPage: React.FC = () => {
@@ -37,7 +38,7 @@ const MainPage: React.FC = () => {
         gameMutate.mutate(update.gameInfo);
     };
 
-    if (userQuery.isPending || gameQuery.isPending) return <div>Loading...</div>;
+    if (userQuery.isPending || gameQuery.isPending) return <Loading />;
     if (userQuery.isError || userQuery.isError) return <div>Error</div>;
     if (!userQuery.data || !gameQuery.data) return <div>No data</div>;
 
