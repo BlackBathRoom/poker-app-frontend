@@ -3,18 +3,23 @@ import type { UserInfoWithId } from "../../game/types";
 import ModalFrame from "../Modal/ModalFrame";
 import GameStartBtn from "../GameCtlBtn/GameStartBtn";
 import GameEndBtn from "../GameCtlBtn/GameEndBtn";
+import NextStepBtn from "../GameCtlBtn/NextStepBtn";
 
 
 type Props = {
     users: Pick<UserInfoWithId, "id" | "name">[];
-    startGame: () => void;
-    endGame: (id: string) => void;
+    isPlaying: boolean;
+    gameControlFn: {
+        startGame: () => void;
+        nextStep: () => void;
+        endGame: (id: string) => void;
+    };
 };
 
 const GameControl: React.FC<Props> = ({
     users,
-    startGame,
-    endGame,
+    isPlaying,
+    gameControlFn: { startGame, nextStep, endGame },
 }) => {
     const { Modal, openModal, closeModal } = useModal();
     
@@ -38,6 +43,11 @@ const GameControl: React.FC<Props> = ({
         <Modal>
             <ModalFrame modalName="ゲーム管理" closeModal={closeModal}>
                 <GameStartBtn startGame={handleStart} />
+                {isPlaying ? (
+                    <NextStepBtn nextStep={nextStep} />
+                ): (
+                    <GameStartBtn startGame={handleStart} />
+                )}
                 <GameEndBtn users={users} endGame={handleEnd} />
             </ModalFrame>
         </Modal>
