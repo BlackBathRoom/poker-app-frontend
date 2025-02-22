@@ -1,9 +1,11 @@
+import { useEffect } from "react";
 import { useModal } from "../components/Modal/useModal";
 import { useNavigate } from "react-router-dom";
 
 import { FIXED_GAME_ID } from "../config";
 import { useGame } from "../hook/useGame";
 import { useUserContext } from "../hook/useUserContext";
+import { deleteUserInfo } from "../api/hoge";
 import ActionBtn from "../components/UserManage/ActionBtn";
 import ActionModal from "../components/UserManage/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
@@ -23,6 +25,15 @@ const MainPage: React.FC = () => {
         action 
     } = useGame(id as string, FIXED_GAME_ID);
     const { Modal, openModal, closeModal } = useModal();
+
+    useEffect(() => {
+        const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
+            e.preventDefault();
+            if (id) await deleteUserInfo(id as string);
+        };
+        window.addEventListener("beforeunload", handleBeforeUnload);
+        return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+    });
 
     if (isPending) return <Loading />;
     if (isError) return <div>Error</div>;
