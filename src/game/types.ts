@@ -19,3 +19,16 @@ export type GameStatus = {
 };
 
 export type Action = (index: number, action: ActionType, amount?: number) => void;
+
+export type GameState = Pick<GameStatus, "currentBet" | "pot">;
+
+export type UserState = {
+    chip: number;
+    amount: number;
+};
+
+export type UpdateInfo = {
+    userInfo: Partial<Pick<UserInfo, "chip" | "isPlaying">>; 
+    gameInfo: Partial<GameState>;
+};
+
