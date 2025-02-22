@@ -9,9 +9,9 @@ type Props = {
 
 const UserList: React.FC<Props> = ({ users, updateUserInfo }) => {
     return (
-        <div className="p-4 bg-gray-800 rounded-md max-h-[80%] overflow-y-auto">
+        <div className="p-4 bg-gray-800 rounded-md flex flex-col gap-2 max-h-[85%]">
             <h2 className="text-white text-xl text-center mb-2">ユーザー</h2>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2 overflow-y-auto">
                 {users.map((user) => (
                     <li
                         key={user.id} 

@@ -21,7 +21,7 @@ const AdminPage: React.FC = () => {
     if (!users || !game) return <div>データがありません</div>;
 
     return (
-        <div className="p-10">
+        <div className="w-full h-full p-10 flex flex-col">
             <UserList users={users} updateUserInfo={updateUserInfo} />
             <GameControl
                 users={
