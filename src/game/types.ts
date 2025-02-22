@@ -29,6 +29,6 @@ export type UserState = {
 
 export type UpdateInfo = {
     userInfo: Partial<Pick<UserInfo, "chip" | "isPlaying">>; 
-    gameInfo: Partial<GameState>;
+    gameInfo: Partial<GameStatus>;
 };
 
