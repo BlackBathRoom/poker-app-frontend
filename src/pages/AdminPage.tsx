@@ -27,7 +27,12 @@ const AdminPage: React.FC = () => {
             ids: userQuery.data.map((user) => user.id),
             userInfo: { isPlaying: true },
         });
-        gameMutate.mutate({ "isPlaying": true });
+        gameMutate.mutate({ isPlaying: true });
+    };
+
+    const nextStep = () => {
+        if (!userQuery.data || !gameQuery.data) return;
+        gameMutate.mutate({ currentBet: 0 });
     };
 
     const endGame = (id: string) => {
@@ -46,9 +51,9 @@ const AdminPage: React.FC = () => {
             userInfo: { isPlaying: false },
         });
         gameMutate.mutate({
-            "currentBet": 0,
-            "pot": 0,
-            "isPlaying": false,
+            currentBet: 0,
+            pot: 0,
+            isPlaying: false,
         });
     };
 
@@ -62,8 +67,8 @@ const AdminPage: React.FC = () => {
                         name: user.name,
                     }))
                 }
-                startGame={startGame}
-                endGame={endGame}
+                isPlaying={gameQuery.data.isPlaying}
+                gameControlFn={{ startGame, nextStep, endGame }}
             />
         </div>
     );

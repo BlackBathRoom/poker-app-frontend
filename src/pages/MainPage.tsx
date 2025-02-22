@@ -57,7 +57,10 @@ const MainPage: React.FC = () => {
                         chips={userQuery.data.chip}
                         isPlaying={userQuery.data.isPlaying}
                     />
-                    <ActionBtn handleModal={openModal} isPlaying={true} />
+                    <ActionBtn
+                        handleModal={openModal}
+                        isPlaying={userQuery.data.isPlaying && gameQuery.data.isPlaying}
+                    />
                 </div>
             </div>
         </div>
