@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useUserContext } from "../hook/useUserContext";
-import { postUserInfo } from "../api/postUserInfo";
+import { postUserInfo } from "../api/users/functions";
 import { INITIAL_USER_STATUS } from "../game/initialStatus";
 import InputForm from "../components/InputForm";
 

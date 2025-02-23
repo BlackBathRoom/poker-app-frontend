@@ -7,10 +7,10 @@ import { FIXED_GAME_ID } from "../config";
 import { useGame } from "../hook/useGame";
 import { useUserContext } from "../hook/useUserContext";
 import { deleteUserInfo } from "../api/users/functions";
-import ActionBtn from "../components/UserManage/ActionBtn";
-import ActionModal from "../components/UserManage/ActionModal/ActionModal";
+import ActionBtn from "../components/Main/ActionBtn";
+import ActionModal from "../components/Main/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
-import UserInfo from "../components/Userinformation/UserInfo";
+import UserInfoLabel from "../components/Main/UserInfoLabel";
 import Loading from "../components/Loading/Loading";
 import ReloadButton from "../components/ReloadButton/ReloadButton"; 
 
@@ -60,12 +60,11 @@ const MainPage: React.FC = () => {
                                 flex flex-col gap-4 justify-between">
                     
                     <GameInfo potSize={game.pot} rate={game.currentBet} />
-                    <UserInfo
+                    <UserInfoLabel
                         userName={user.name}
                         chips={user.chip}
                         isPlaying={user.isPlaying}
                     />
-
                     <div className="flex flex-col items-center gap-4">
                         <ReloadButton onReload={handleReload} />
                         <ActionBtn

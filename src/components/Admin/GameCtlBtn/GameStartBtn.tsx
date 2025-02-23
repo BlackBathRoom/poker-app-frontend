@@ -1,21 +1,21 @@
-import Btn from "../Btn";
+import Btn from "../../Btn";
 
 type Props = {
-    nextStep: () => void;
+    startGame: () => void;
 };
 
-const NextStepBtn: React.FC<Props> = ({ nextStep }) => {
+const GameStartBtn: React.FC<Props> = ({ startGame }) => {
     return (
         <Btn
-            onClick={nextStep}
+            onClick={startGame}
             className="w-32 h-10 m-auto"
             bgColor="bg-lime-500"
             hoverBgColor="bg-lime-600">
             <span className="text-zinc-900 text-xl font-extrabol p-2">
-                Next
+                Start
             </span>
         </Btn>
     );
 };
 
-export default NextStepBtn;
+export default GameStartBtn;
