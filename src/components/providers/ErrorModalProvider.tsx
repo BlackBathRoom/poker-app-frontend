@@ -1,14 +1,15 @@
 import { useState } from "react";
+
 import { errorModalContext } from "../../context/errorModalContext";
-import ModalFrame from "../Modal/ModalFrame";
 import { useModal } from "../Modal/useModal";
+import ModalFrame from "../Modal/ModalFrame";
 
 
 type Props = {
     children: React.ReactNode;
 };
 
-export const ErrorModalProvider: React.FC<Props> = ({ children }) => {
+const ErrorModalContextProvider: React.FC<Props> = ({ children }) => {
     const { Modal, openModal, closeModal } = useModal();
     const [error, setError] = useState<Error | null>(null);
     
@@ -24,4 +25,6 @@ export const ErrorModalProvider: React.FC<Props> = ({ children }) => {
             </Modal>
         </errorModalContext.Provider>
     );
-}
+};
+
+export default ErrorModalContextProvider;
