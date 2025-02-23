@@ -7,7 +7,7 @@ import App from './App.tsx'
 import './index.css'
 
 
-export const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

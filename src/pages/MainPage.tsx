@@ -6,7 +6,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { FIXED_GAME_ID } from "../config";
 import { useGame } from "../hook/useGame";
 import { useUserContext } from "../hook/useUserContext";
-import { deleteUserInfo } from "../api/hoge";
+import { deleteUserInfo } from "../api/users/functions";
 import ActionBtn from "../components/UserManage/ActionBtn";
 import ActionModal from "../components/UserManage/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
@@ -14,12 +14,15 @@ import UserInfo from "../components/Userinformation/UserInfo";
 import Loading from "../components/Loading/Loading";
 import ReloadButton from "../components/ReloadButton/ReloadButton"; 
 
+
 const MainPage: React.FC = () => {
     const { id } = useUserContext();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    if (id === null) navigate("/login", { replace: true });
+    useEffect(() => {
+        if (!id) navigate("/login");
+    }, [id, navigate]);
 
     const {
         data: { user, game },
@@ -36,7 +39,7 @@ const MainPage: React.FC = () => {
         };
         window.addEventListener("beforeunload", handleBeforeUnload);
         return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-    }, );
+    });
 
     const handleReload = () => {
         queryClient.invalidateQueries();
