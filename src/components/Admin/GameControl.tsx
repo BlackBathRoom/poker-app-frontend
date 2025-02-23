@@ -1,9 +1,9 @@
 import { useModal } from "../Modal/useModal";
 import type { UserInfoWithId } from "../../game/types";
 import ModalFrame from "../Modal/ModalFrame";
-import GameStartBtn from "../GameCtlBtn/GameStartBtn";
-import GameEndBtn from "../GameCtlBtn/GameEndBtn";
-import NextStepBtn from "../GameCtlBtn/NextStepBtn";
+import GameStartBtn from "./GameCtlBtn/GameStartBtn";
+import GameEndBtn from "./GameCtlBtn/GameEndBtn";
+import NextStepBtn from "./GameCtlBtn/NextStepBtn";
 
 
 type Props = {
