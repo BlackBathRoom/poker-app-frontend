@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useModal } from "../components/Modal/useModal";
 import { useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
 
 import { FIXED_GAME_ID } from "../config";
 import { useGame } from "../hook/useGame";
@@ -11,18 +12,20 @@ import ActionModal from "../components/UserManage/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
 import UserInfo from "../components/Userinformation/UserInfo";
 import Loading from "../components/Loading/Loading";
-
+import ReloadButton from "../components/ReloadButton/ReloadButton"; 
 
 const MainPage: React.FC = () => {
     const { id } = useUserContext();
     const navigate = useNavigate();
+    const queryClient = useQueryClient();
+
     if (id === null) navigate("/login", { replace: true });
 
     const {
         data: { user, game },
         isPending,
         isError,
-        action 
+        action
     } = useGame(id as string, FIXED_GAME_ID);
     const { Modal, openModal, closeModal } = useModal();
 
@@ -33,7 +36,11 @@ const MainPage: React.FC = () => {
         };
         window.addEventListener("beforeunload", handleBeforeUnload);
         return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-    });
+    }, );
+
+    const handleReload = () => {
+        queryClient.invalidateQueries();
+    };
 
     if (isPending) return <Loading />;
     if (isError) return <div>Error</div>;
@@ -45,19 +52,24 @@ const MainPage: React.FC = () => {
                 <Modal>
                     <ActionModal action={action} closeModal={closeModal} />
                 </Modal>
-                <div className="bg-white text-gray-900 p-8 sm:p-10 md:p-12 rounded-lg shadow-md text-center 
+                <div className="bg-white text-gray-900 p-6 sm:p-8 md:p-10 rounded-lg shadow-md text-center 
                                 w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] 
-                                flex flex-col gap-6 justify-between">
+                                flex flex-col gap-4 justify-between">
+                    
                     <GameInfo potSize={game.pot} rate={game.currentBet} />
                     <UserInfo
                         userName={user.name}
                         chips={user.chip}
                         isPlaying={user.isPlaying}
                     />
-                    <ActionBtn
-                        handleModal={openModal}
-                        isPlaying={user.isPlaying && game.isPlaying}
-                    />
+
+                    <div className="flex flex-col items-center gap-4">
+                        <ReloadButton onReload={handleReload} />
+                        <ActionBtn
+                            handleModal={openModal}
+                            isPlaying={user.isPlaying && game.isPlaying}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
