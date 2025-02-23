@@ -23,11 +23,6 @@ const GameControl: React.FC<Props> = ({
 }) => {
     const { Modal, openModal, closeModal } = useModal();
     
-    const handleCloseModal = <T extends readonly unknown[]>(gameFn: (...fnArgs: T) => void, ...args: T) => {
-        gameFn(...args);
-        closeModal();
-    };
-
     return (
         <>
         <button 
@@ -38,11 +33,11 @@ const GameControl: React.FC<Props> = ({
         <Modal>
             <ModalFrame modalName="ゲーム管理" closeModal={closeModal}>
                 {isPlaying ? (
-                    <NextStepBtn nextStep={() => handleCloseModal(nextStep)} />
+                    <NextStepBtn nextStep={() => closeModal(nextStep)} />
                 ): (
-                    <GameStartBtn startGame={() => handleCloseModal(startGame)} />
+                    <GameStartBtn startGame={() => closeModal(startGame)} />
                 )}
-                <GameEndBtn users={users} endGame={(id) => handleCloseModal(endGame, id)} />
+                <GameEndBtn users={users} endGame={(id) => closeModal(endGame, id)} />
             </ModalFrame>
         </Modal>
         </>
