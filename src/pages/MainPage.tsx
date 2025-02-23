@@ -12,7 +12,7 @@ import ActionModal from "../components/UserManage/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
 import UserInfo from "../components/Userinformation/UserInfo";
 import Loading from "../components/Loading/Loading";
-import ReloadButton from "../components/Reload-button/Reload-button"; // リロードボタン
+import ReloadButton from "../components/ReloadButton/ReloadButton"; 
 
 const MainPage: React.FC = () => {
     const { id } = useUserContext();
@@ -36,7 +36,7 @@ const MainPage: React.FC = () => {
         };
         window.addEventListener("beforeunload", handleBeforeUnload);
         return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-    }, [id]);
+    }, );
 
     const handleReload = () => {
         queryClient.invalidateQueries();
@@ -63,7 +63,7 @@ const MainPage: React.FC = () => {
                         isPlaying={user.isPlaying}
                     />
 
-                    <div className="flex flex-col items-center gap-2">
+                    <div className="flex flex-col items-center gap-4">
                         <ReloadButton onReload={handleReload} />
                         <ActionBtn
                             handleModal={openModal}
