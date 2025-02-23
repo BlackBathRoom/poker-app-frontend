@@ -1,4 +1,4 @@
-import { useModal } from "../Modal/useModal";
+import { useModal } from "../../hook/useModal";
 import type { UserInfoWithId } from "../../game/types";
 import ModalFrame from "../Modal/ModalFrame";
 import GameStartBtn from "./GameCtlBtn/GameStartBtn";

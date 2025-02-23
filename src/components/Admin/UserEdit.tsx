@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useModal } from "../Modal/useModal";
+import { useModal } from "../../hook/useModal"; 
 import type { UserInfo } from "../../game/types";
 import UserEditModal from "./UserEditModal";
 

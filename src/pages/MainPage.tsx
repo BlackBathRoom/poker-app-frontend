@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useModal } from "../components/Modal/useModal";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 
 import { FIXED_GAME_ID } from "../config";
 import { useGame } from "../hook/useGame";
+import { useModal } from "../hook/useModal";
 import { useUserContext } from "../hook/useUserContext";
 import { deleteUserInfo } from "../api/users/functions";
 import ActionBtn from "../components/Main/ActionBtn";

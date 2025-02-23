@@ -1,5 +1,5 @@
 import type { UserInfoWithId } from "../../../game/types";
-import { useModal } from "../../Modal/useModal";
+import { useModal } from "../../../hook/useModal"; 
 import Btn from "../../Btn";
 import WinnerModal from "./WinnerModal/WinnerModal";
 
