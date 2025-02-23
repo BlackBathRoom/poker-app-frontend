@@ -14,12 +14,15 @@ import UserInfo from "../components/Userinformation/UserInfo";
 import Loading from "../components/Loading/Loading";
 import ReloadButton from "../components/ReloadButton/ReloadButton"; 
 
+
 const MainPage: React.FC = () => {
     const { id } = useUserContext();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
-    if (id === null) navigate("/login", { replace: true });
+    useEffect(() => {
+        if (!id) navigate("/login");
+    }, [id, navigate]);
 
     const {
         data: { user, game },
@@ -36,7 +39,7 @@ const MainPage: React.FC = () => {
         };
         window.addEventListener("beforeunload", handleBeforeUnload);
         return () => window.removeEventListener("beforeunload", handleBeforeUnload);
-    }, );
+    });
 
     const handleReload = () => {
         queryClient.invalidateQueries();
