@@ -24,12 +24,7 @@ const AdminPage: React.FC = () => {
         <div className="w-full h-full p-10 flex flex-col">
             <UserList users={users} updateUserInfo={updateUserInfo} />
             <GameControl
-                users={
-                    users.map((user) => ({
-                        id: user.id,
-                        name: user.name,
-                    }))
-                }
+                users={users.filter((user) => user.isPlaying)}
                 isPlaying={game.isPlaying}
                 gameControlFn={{ startGame, nextStep, endGame }}
             />
