@@ -23,10 +23,10 @@ const GameControl: React.FC<Props> = ({
 }) => {
     const { Modal, openModal, closeModal } = useModal();
     
-    const handleCloseModal = (gameFn: () => void) => {
-        gameFn();
+    const handleCloseModal = <T extends readonly unknown[]>(gameFn: (...fnArgs: T) => void, ...args: T) => {
+        gameFn(...args);
         closeModal();
-    }
+    };
 
     return (
         <>
@@ -42,7 +42,7 @@ const GameControl: React.FC<Props> = ({
                 ): (
                     <GameStartBtn startGame={() => handleCloseModal(startGame)} />
                 )}
-                <GameEndBtn users={users} endGame={(id) => handleCloseModal(() => endGame(id))} />
+                <GameEndBtn users={users} endGame={(id) => handleCloseModal(endGame, id)} />
             </ModalFrame>
         </Modal>
         </>
