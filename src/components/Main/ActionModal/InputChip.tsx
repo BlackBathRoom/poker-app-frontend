@@ -11,7 +11,7 @@ type Props = {
 
 const InputChip: React.FC<Props> = ({ actionType, action }) => {
     const [chip, setChip] = useState<number>(0);
-    const { setError, openErrorModal } = useErrorModal();
+    const { openErrorModal } = useErrorModal();
 
     const handleChip = (e: React.ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
@@ -23,10 +23,7 @@ const InputChip: React.FC<Props> = ({ actionType, action }) => {
         try {
             action(chip);
         } catch (error) {
-            if (error instanceof Error) {
-                setError(error);
-                openErrorModal(error);
-            }
+            if (error instanceof Error) openErrorModal(error);
         }
     }
 
