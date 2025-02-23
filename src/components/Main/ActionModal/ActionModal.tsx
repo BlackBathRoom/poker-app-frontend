@@ -16,7 +16,7 @@ const ActionModal: React.FC<Props> = ({
     closeModal,
 }) => {
     const [isInputOpen, setIsInputOpen] = useState<InputAction | null>(null);
-    const { setError, openErrorModal} = useErrorModal();
+    const { openErrorModal } = useErrorModal();
     const openInput = (kind: InputAction) => {
         setIsInputOpen(kind);
     };
@@ -30,10 +30,7 @@ const ActionModal: React.FC<Props> = ({
         try {
             action(actionType, chip);
         } catch (error) {
-            if (error instanceof Error) {
-                setError(error);
-                openErrorModal(error);
-            };
+            if (error instanceof Error) openErrorModal(error);
         };
     };
 
