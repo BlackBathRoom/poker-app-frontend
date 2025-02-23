@@ -26,7 +26,7 @@ const GameControl: React.FC<Props> = ({
     return (
         <>
         <button 
-            onClick={openModal} 
+            onClick={() => openModal()} 
             className="bg-gray-800 hover:bg-gray-600 px-4 py-2 mt-4 text-white rounded-md w-fit mx-auto block">
             ゲーム制御
         </button>
