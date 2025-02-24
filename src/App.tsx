@@ -7,6 +7,7 @@ import Layout from "./Layout";
 import MainPage from "./pages/MainPage";
 import LoginPage from "./pages/Login";
 import AdminPage from "./pages/AdminPage";
+import NotFound from "./pages/NotFoundPage";
 
 
 const App: React.FC = () => {
@@ -20,6 +21,7 @@ const App: React.FC = () => {
                         <Route path="/login" element={<LoginPage />} />
                         <Route path="/admin" element={<AdminPage />} />
                     </Route>
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </ErrorModalProvider>
         </UserContextProvider>
