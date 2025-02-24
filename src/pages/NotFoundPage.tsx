@@ -82,3 +82,4 @@ const NotFound: React.FC = () => {
 };
 
 export default NotFound;
+{/* <Route path="*" element={<NotFound />} /> */}
