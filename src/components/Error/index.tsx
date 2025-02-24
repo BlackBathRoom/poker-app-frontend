@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import HorieDieFace from "./public/Horie-die-face.png";
 
 type Position = {
@@ -6,24 +6,20 @@ type Position = {
     top: number;
 };
 
+const generateRandomPosition = (): Position => {
+    return {
+        left: Math.random() * 90, 
+        top: Math.random() * 90,
+    };
+};
+
 const ErrorPage: React.FC = () => {
     const [imageCount, setImageCount] = useState(1);
-    const [positions, setPositions] = useState<Position[]>([]);
-
-    useEffect(() => {
-        if (positions.length < imageCount) {
-            setPositions((prev) => [
-                ...prev,
-                ...Array.from({ length: imageCount - prev.length }).map(() => ({
-                    left: Math.random() * 90, 
-                    top: Math.random() * 90,
-                })),
-            ]);
-        }
-    }, [imageCount, positions.length]);
+    const [positions, setPositions] = useState<Position[]>([generateRandomPosition()]);
 
     const handleImageClick = () => {
-        setImageCount((prev) => prev + 1);
+        setImageCount(prev => prev + 1);
+        setPositions(prev => [...prev, generateRandomPosition()]);
     };
 
     const images = Array.from({ length: imageCount });
@@ -46,7 +42,7 @@ const ErrorPage: React.FC = () => {
                         style={{
                             position: "absolute",
                             left: `${pos.left}%`,
-                            top: `${pos.top}%`,
+                            top: `${pos.top}%`
                         }}
                         className="cursor-pointer transition-transform duration-300"
                     />
