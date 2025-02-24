@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { UserContext } from "../../context/userContext";
 
+
 type Props = {
     children: React.ReactNode;
 };
 
-export const UserContextProvider: React.FC<Props> = ({ children }) => {
+const UserContextProvider: React.FC<Props> = ({ children }) => {
     const [ id, setId ] = useState<string | null>(null);
 
     return(
@@ -14,3 +15,5 @@ export const UserContextProvider: React.FC<Props> = ({ children }) => {
         </UserContext.Provider>
     );
 };
+
+export default UserContextProvider;

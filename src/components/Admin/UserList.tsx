@@ -9,13 +9,13 @@ type Props = {
 
 const UserList: React.FC<Props> = ({ users, updateUserInfo }) => {
     return (
-        <div className="p-4 bg-gray-800 rounded-md max-h-[80%] overflow-y-auto">
+        <div className="w-full p-4 bg-gray-800 rounded-md flex flex-col gap-2 max-h-[85%]">
             <h2 className="text-white text-xl text-center mb-2">ユーザー</h2>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col w-full gap-2 overflow-y-auto">
                 {users.map((user) => (
                     <li
                         key={user.id} 
-                        className="flex justify-around  text-white sm:text-xl md:text-2xl lg:text-3xl p-2 border-b border-gray-600 "
+                        className="flex justify-between w-full px-20 py-2 text-white sm:text-xl md:text-2xl lg:text-3xl border-b border-gray-600 "
                     >
                         <div className="flex justify-center">
                             <UserEdit

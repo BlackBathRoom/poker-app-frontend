@@ -1,6 +1,6 @@
-import type { UserInfoWithId } from "../../../game/types";
-import Btn from "../../Btn";
-import ModalFrame from "../../Modal/ModalFrame";
+import type { UserInfoWithId } from "../../../../game/types";
+import Btn from "../../../Btn";
+import ModalFrame from "../../../Modal/ModalFrame";
 
 
 type Props = {

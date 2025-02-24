@@ -5,15 +5,18 @@ import {
     clearAllBodyScrollLocks,
 } from "body-scroll-lock";
 
+
+type WrapperFn = <T extends readonly unknown[]>(fn?: (...args: T) => void, ...args: T) => void;
+
 type ModalProps = {
     children: React.ReactNode;
 };
 
 type Return = {
     Modal: React.FC<ModalProps>;
-    openModal: () => void;
-    closeModal: () => void;
-}
+    openModal: WrapperFn;
+    closeModal: WrapperFn;
+};
 
 export const useModal = (): Return => {
     const [isVisible, setIsVisible] = useState<boolean>(false);
@@ -31,15 +34,22 @@ export const useModal = (): Return => {
         return () => clearAllBodyScrollLocks();
     }, [isVisible, modalRef]);
 
-    const openModal = () => setIsVisible(true);
-    const closeModal = () => setIsVisible(false);
+    const openModal: WrapperFn = (onOpen, ...args) => {
+        if (onOpen) onOpen(...args);
+        setIsVisible(true);
+    };
+
+    const closeModal: WrapperFn = (onClose, ...args) => {
+        if (onClose) onClose(...args);
+        setIsVisible(false);
+    }
 
     const Modal: React.FC<ModalProps> = ({ children }) => {
         const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
             if (e.target === e.currentTarget) {
                 closeModal();
             }
-        }
+        };
 
         return (
             <div ref={modalRef}>
@@ -51,11 +61,11 @@ export const useModal = (): Return => {
                         >
                             {children}
                         </div>
-                </div>
+                    </div>
                 )}
             </div>
         );
-    }
+    };
 
     return { Modal, openModal, closeModal };
 };
