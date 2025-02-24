@@ -28,7 +28,7 @@ const Btn: React.FC<Props> = ({
         <div className="w-full flex items-center justify-center">
             <button
             className={`${bgColor} hover:${hoverBgColor} rounded-md ${className}`}
-            onClick={onClick}
+            onClick={() => onClick && onClick()}
             disabled={disabled}
             type={type}
             >

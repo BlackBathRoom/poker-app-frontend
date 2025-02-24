@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useUserContext } from "../hook/useUserContext";
-import { postUserInfo } from "../api/postUserInfo";
+import { postUserInfo } from "../api/users/functions";
 import { INITIAL_USER_STATUS } from "../game/initialStatus";
 import InputForm from "../components/InputForm";
 
@@ -14,6 +14,10 @@ const LoginPage: React.FC = () => {
 
     const [username, setUsername] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
+
+    useEffect(() => {
+        if (id) navigate("/main");
+    }, [id, navigate])
 
     // ユーザー名入力時の処理
     const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,10 +47,6 @@ const LoginPage: React.FC = () => {
         setErrorMessage("");
         alert("ログイン成功！");
     };
-
-    if (id !== null) {
-        navigate("/main");
-    }
 
     return (
         <div className="max-w-screen-md h-full m-auto flex flex-col gap-10">

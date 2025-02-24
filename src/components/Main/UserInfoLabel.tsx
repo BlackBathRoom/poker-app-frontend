@@ -1,10 +1,10 @@
-interface UserInfoProps {
+interface Props {
     userName: string;
     chips: number;
     isPlaying?: boolean; 
-}
+};
 
-const UserInfo: React.FC<UserInfoProps> = ({ userName, chips, isPlaying = true }) => { 
+const UserInfoLabel: React.FC<Props> = ({ userName, chips, isPlaying = true }) => { 
     return (
         <div className="flex flex-col gap-4 items-center">
             <p className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl">
@@ -20,4 +20,4 @@ const UserInfo: React.FC<UserInfoProps> = ({ userName, chips, isPlaying = true }
     );
 };
 
-export default UserInfo;
+export default UserInfoLabel;
