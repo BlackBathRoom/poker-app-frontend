@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 
 import { USER_INFO_FETCH_INTERVAL, USERS_INFO_FETCH_INTERVAL } from "../constant";
 import { usersKeys } from "./key"
-import { fetchAllUserInfo, fetchUserInfo, updateSelectedUserInfo, updateUserInfo } from "./functions"
+import { deleteUserInfo, fetchAllUserInfo, fetchUserInfo, updateSelectedUserInfo, updateUserInfo } from "./functions"
 import { userInfoSelector, allUserInfoSelector, allUserInfoWithIdSelector } from "./selector";
 import type { UserInfo } from "../../game/types";
 
@@ -34,7 +34,7 @@ export const usePutUserInfo = (userId: string) => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: usersKeys.id(userId),
-            })
+            });
         },
     });
     return mutation;
@@ -62,7 +62,20 @@ export const usePutSelectedUserInfo = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: usersKeys.allWithId(),
-            })
+            });
+        },
+    });
+    return mutation;
+};
+
+export const useDeleteUserInfo = () => {
+    const queryClient = useQueryClient();
+    const mutation = useMutation({
+        mutationFn: (userId: string) => deleteUserInfo(userId),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: usersKeys.allWithId(),
+            });
         },
     });
     return mutation;

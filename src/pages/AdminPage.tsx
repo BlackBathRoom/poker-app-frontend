@@ -14,6 +14,7 @@ const AdminPage: React.FC = () => {
         startGame,
         nextStep,
         endGame,
+        handleDeleteUser,
     } = useGameControl(FIXED_GAME_ID);
 
     if (isPending) return <Loading />;
@@ -22,7 +23,7 @@ const AdminPage: React.FC = () => {
 
     return (
         <div className="w-full h-full p-10 flex flex-col">
-            <UserList users={users} updateUserInfo={updateUserInfo} />
+            <UserList users={users} updateUserInfo={updateUserInfo} deleteUser={handleDeleteUser} />
             <GameControl
                 users={users.filter((user) => user.isPlaying)}
                 isPlaying={game.isPlaying}

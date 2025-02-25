@@ -6,7 +6,7 @@ import {
 } from "body-scroll-lock";
 
 
-type WrapperFn = <T extends readonly unknown[]>(fn?: (...args: T) => void, ...args: T) => void;
+export type WrapperFn = <T extends readonly unknown[]>(fn?: (...args: T) => void, ...args: T) => void;
 
 type ModalProps = {
     children: React.ReactNode;
