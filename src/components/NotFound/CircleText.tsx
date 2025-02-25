@@ -1,55 +1,49 @@
 type Props = {
+    children?: React.ReactNode;
     text: string;
+    radius?: number;
+    fontSize?: number;
 };
 
-const CircleText: React.FC<Props> = ({ text }) => {
-    const textLength = text.length;
+const CircleText: React.FC<Props> = ({
+    children,
+    text,
+    radius = 75,
+    fontSize = 16,
+}) => {
+    const circumference = radius * 2 * Math.PI;
+    const diameter = radius * 2;
+    const boxSize = diameter + fontSize * 2;
     const textArray = [...text];
-    const radius = 300;
-    const fontSize = 60;
-    const circleLength = radius * 2 * Math.PI;
-    const viewBoxSize = radius * 2 + fontSize + 50; 
-    const textSpacing = circleLength / textLength; 
+    const uniqueId = `circlePath-${Math.random().toString(36).substr(2, 9)}`; 
 
     return (
-        <div className="h-fit w-fit relative">
-            <style>
-                {`
-                    @keyframes circleSpin {
-                        0% {
-                            transform: rotate(0deg);
-                        }
-                        100% {
-                            transform: rotate(360deg);
-                        }
-                    }
-
-                    .animate-circle-spin {
-                        animation: circleSpin 10s linear infinite;
-                    }
-                `}
-            </style>
-
+        <div className="relative flex" style={{ height: diameter, width: diameter }}>
             <svg
-                viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`} 
-                className="w-80 h-80 animate-circle-spin" 
+                viewBox={`0 0 ${boxSize} ${boxSize}`}
+                className="absolute top-0 left-0 animate-circle-spin"
+                style={{ height: diameter, width: diameter }}
             >
                 <defs>
                     <path
-                        id="circlePath"
-                        d={`M ${viewBoxSize / 2}, ${viewBoxSize / 2} m -${radius}, 0 a ${radius},${radius} 0 1,1 ${radius * 2},0 a ${radius},${radius} 0 1,1 -${radius * 2},0`}
+                        id={uniqueId}
+                        d={`M ${boxSize / 2}, ${boxSize / 2} m -${radius}, 0 a ${radius},${radius} 0 1,1 ${diameter},0 a ${radius},${radius} 0 1,1 -${diameter},0`}
                     />
                 </defs>
                 <text fontSize={fontSize} fill="white">
-                    <textPath href="#circlePath" textLength={circleLength}>
+                    <textPath href={`#${uniqueId}`} textLength={circumference}>
                         {textArray.map((char, index) => (
-                            <tspan key={index} dx={textSpacing}>
+                            <tspan
+                                dx={circumference / textArray.length}
+                                key={index}
+                            >
                                 {char}
                             </tspan>
                         ))}
                     </textPath>
                 </text>
             </svg>
+            <div className="m-auto">{children}</div>
         </div>
     );
 };
