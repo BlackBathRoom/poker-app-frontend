@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import CircleText from "../components/NotFound/CircleText";
-import RandomImage from "../components/NotFound/RandomImage";
 import RotatingImage from "../components/NotFound/RotatingImage";
+import ClickToAddImage from "../components/NotFound/ClickToAddImage";
+import RandomImage from "../components/NotFound/RandomImage";
 
 const NotFound: React.FC = () => {
     const fullText = "NOTFOUND";
@@ -21,6 +22,9 @@ const NotFound: React.FC = () => {
     return (
         <div className="relative flex items-center justify-center w-full h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full z-0">
+                <ClickToAddImage />
+            </div>
+            <div>
                 <RandomImage />
             </div>
             <div className="absolute top-0 right-0 z-20">
