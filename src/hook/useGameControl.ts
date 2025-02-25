@@ -6,7 +6,7 @@ import {
     endGame as endGameFn,
 } from "../game/gameCtl";
 import { changeRole as changeRoleFn } from "../game/changeRole";
-import type { UserInfo } from "../game/types";
+import type { GameStatus, UserInfo } from "../game/types";
 
 
 export const useGameControl = (gameId: string) => {
@@ -26,6 +26,10 @@ export const useGameControl = (gameId: string) => {
 
     const updateUserInfo = (id: string, userInfo: Partial<UserInfo>) => {
         userMutate.mutate({ ids: [id], userInfo });
+    };
+
+    const updateGameInfo = (gameStatus: Partial<GameStatus>) => {
+        gameMutate.mutate(gameStatus);
     };
 
     const startGame = () => {
@@ -93,6 +97,7 @@ export const useGameControl = (gameId: string) => {
         isError,
         data,
         updateUserInfo,
+        updateGameInfo,
         startGame,
         nextStep,
         endGame,
