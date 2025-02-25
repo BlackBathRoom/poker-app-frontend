@@ -1,10 +1,17 @@
 import { GameState, UpdateInfo, UserInfo } from "./types";
 
 
-export const startGame = (): UpdateInfo => {
+type BlindUser = {
+    sbUser: Pick<UserInfo, "chip">;
+    bbUser: Pick<UserInfo, "chip">;
+};
+
+export const startGame = (rate: number): BlindUser & UpdateInfo => {
     return {
+        sbUser: { chip: rate },
+        bbUser: { chip: rate * 2 },
         userInfo: { isPlaying: true },
-        gameInfo: { isPlaying: true },
+        gameInfo: { pot: rate * 3, isPlaying: true },
     };
 };
 
