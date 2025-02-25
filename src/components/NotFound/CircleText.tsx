@@ -5,9 +5,10 @@ type Props = {
 const CircleText: React.FC<Props> = ({ text }) => {
     const textLength = text.length;
     const textArray = [...text];
-    const radius = 300; 
+    const radius = 300;
+    const fontSize = 60;
     const circleLength = radius * 2 * Math.PI;
-    const viewBoxSize = radius * 2 + 50;
+    const viewBoxSize = radius * 2 + fontSize + 50; 
     const textSpacing = circleLength / textLength; 
 
     return (
@@ -30,8 +31,8 @@ const CircleText: React.FC<Props> = ({ text }) => {
             </style>
 
             <svg
-                viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
-                className="w-80 h-80 animate-circle-spin"
+                viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`} 
+                className="w-80 h-80 animate-circle-spin" 
             >
                 <defs>
                     <path
@@ -39,7 +40,7 @@ const CircleText: React.FC<Props> = ({ text }) => {
                         d={`M ${viewBoxSize / 2}, ${viewBoxSize / 2} m -${radius}, 0 a ${radius},${radius} 0 1,1 ${radius * 2},0 a ${radius},${radius} 0 1,1 -${radius * 2},0`}
                     />
                 </defs>
-                <text fontSize="36" fill="white">
+                <text fontSize={fontSize} fill="white">
                     <textPath href="#circlePath" textLength={circleLength}>
                         {textArray.map((char, index) => (
                             <tspan key={index} dx={textSpacing}>

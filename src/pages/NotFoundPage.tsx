@@ -3,7 +3,7 @@ import CircleText from "../components/NotFound/CircleText";
 
 const NotFound: React.FC = () => {
   const fullText = "NOTFOUND";
-  const [displayText, setDisplayText] = useState(""); // 表示用テキスト
+  const [displayText, setDisplayText] = useState("");
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
