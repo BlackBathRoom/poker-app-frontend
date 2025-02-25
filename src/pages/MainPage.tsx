@@ -13,6 +13,7 @@ import GameInfo from "../components/GameInfo/GameInfo";
 import UserInfoLabel from "../components/Main/UserInfoLabel";
 import Loading from "../components/Loading/Loading";
 import ReloadButton from "../components/ReloadButton/ReloadButton"; 
+import KickUserBtn from "../components/Admin/KickUserBtn";
 
 
 const MainPage: React.FC = () => {
@@ -55,22 +56,24 @@ const MainPage: React.FC = () => {
                 <Modal>
                     <ActionModal action={action} closeModal={closeModal} />
                 </Modal>
-                <div className="bg-white text-gray-900 p-6 sm:p-8 md:p-10 rounded-lg shadow-md text-center 
+                <div className="bg-white/50 text-gray-900 p-6 sm:p-8 md:p-10 rounded-lg shadow-md text-center 
                                 w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] 
-                                flex flex-col gap-4 justify-between">
-                    
+                                flex flex-col gap-4 justify-between items-center">
+                    <div className="flex flex-col items-center gap-10">
+                    <ReloadButton onReload={handleReload} />
                     <GameInfo potSize={game.pot} rate={game.currentBet} />
                     <UserInfoLabel
                         userName={user.name}
                         chips={user.chip}
                         isPlaying={user.isPlaying}
                     />
+                    </div>
                     <div className="flex flex-col items-center gap-4">
-                        <ReloadButton onReload={handleReload} />
                         <ActionBtn
                             handleModal={openModal}
                             isPlaying={user.isPlaying && game.isPlaying}
                         />
+                        <KickUserBtn deleteUser={() => closeModal}/>
                     </div>
                 </div>
             </div>
