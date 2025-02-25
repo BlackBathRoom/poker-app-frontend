@@ -60,20 +60,22 @@ const MainPage: React.FC = () => {
                                 w-[90%] sm:max-w-[600px] md:max-w-[700px] lg:max-w-[850px] min-h-[75vh] 
                                 flex flex-col gap-4 justify-between items-center">
                     <div className="flex flex-col items-center gap-10">
-                    <ReloadButton onReload={handleReload} />
-                    <GameInfo potSize={game.pot} rate={game.currentBet} />
-                    <UserInfoLabel
-                        userName={user.name}
-                        chips={user.chip}
-                        isPlaying={user.isPlaying}
-                    />
+                        <div className="w-full flex justify-between">
+                            <ReloadButton onReload={handleReload} />
+                            <KickUserBtn deleteUser={() => closeModal}/>
+                        </div>
+                        <GameInfo potSize={game.pot} rate={game.currentBet} />
+                        <UserInfoLabel
+                            userName={user.name}
+                            chips={user.chip}
+                            isPlaying={user.isPlaying}
+                        />
                     </div>
                     <div className="flex flex-col items-center gap-4">
                         <ActionBtn
                             handleModal={openModal}
                             isPlaying={user.isPlaying && game.isPlaying}
                         />
-                        <KickUserBtn deleteUser={() => closeModal}/>
                     </div>
                 </div>
             </div>
