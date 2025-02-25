@@ -1,5 +1,5 @@
 import { useGetGameInfo, usePutGameInfo } from "../api/gameInfo";
-import { useGetUser, usePutUserInfo } from "../api/users";
+import { useDeleteUserInfo, useGetUser, usePutUserInfo } from "../api/users";
 import { action as actionFunc } from "../game/action";
 import type { ActionType } from "../game/types";
 
@@ -9,6 +9,7 @@ export const useGame = (userId: string, gameId: string) => {
     const gameQuery = useGetGameInfo(gameId);
 
     const userMutate = usePutUserInfo(userId);
+    const userDeleteMutate = useDeleteUserInfo();
     const gameMutate = usePutGameInfo(gameId);
 
     const isPending = userQuery.isPending || gameQuery.isPending;
@@ -29,5 +30,9 @@ export const useGame = (userId: string, gameId: string) => {
         gameMutate.mutate(update.gameInfo);
     };
 
-    return { isPending, isError, data, action };
+    const handleRemove = () => {
+        userDeleteMutate.mutate(userId)
+    }
+
+    return { isPending, isError, data, action, handleRemove };
 };
