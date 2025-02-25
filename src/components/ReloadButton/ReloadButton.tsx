@@ -8,11 +8,14 @@ const ReloadButton: React.FC<ReloadButtonProps> = ({ onReload }) => {
   return (
     <button
       onClick={onReload}
-      className="px-3 py-2 text-xs sm:text-sm bg-gradient-to-r from-blue-500 to-blue-700 text-white font-semibold 
+      className="bg-gradient-to-r from-blue-500 to-blue-700
                  rounded-full shadow-md hover:opacity-80 active:scale-95 
-                 transition duration-300 ease-in-out max-w-[120px]" 
+                 transition duration-300 ease-in-out" 
     >
-      ⟳ Reload
+      <img
+        src="./reload.svg"
+        className="w-12"
+      />
     </button>
   );
 };
