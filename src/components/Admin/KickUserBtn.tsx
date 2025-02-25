@@ -9,7 +9,7 @@ const KickUserBtn: React.FC<Props> = ({ deleteUser }) => {
             className="w-32 pb-2 bg-red-600 hover:bg-red-500 desabled:bg-gray-600 rounded-md"
         >
             <span className="text-xl text-white text-center">
-                強制退出
+                退出
             </span>
         </button>
     );
