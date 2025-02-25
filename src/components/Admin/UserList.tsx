@@ -5,9 +5,10 @@ import UserEdit from "./UserEdit";
 type Props = {
     users: UserInfoWithId[];
     updateUserInfo: (id: string, userInfo: Partial<UserInfo>) => void;
+    deleteUser: (id: string) => void; 
 };
 
-const UserList: React.FC<Props> = ({ users, updateUserInfo }) => {
+const UserList: React.FC<Props> = ({ users, updateUserInfo, deleteUser }) => {
     return (
         <div className="w-full p-4 bg-gray-800 rounded-md flex flex-col gap-2 max-h-[85%]">
             <h2 className="text-white text-xl text-center mb-2">ユーザー</h2>
@@ -20,7 +21,8 @@ const UserList: React.FC<Props> = ({ users, updateUserInfo }) => {
                         <div className="flex justify-center">
                             <UserEdit
                                 userInfo={user}
-                                updateUserInfo={(userInfo) => updateUserInfo(user.id, userInfo)} 
+                                updateUserInfo={(userInfo) => updateUserInfo(user.id, userInfo)}
+                                deleteUser={() => deleteUser(user.id)}
                             />
                         </div>
                         <span className="text-center">{user.name}</span>
