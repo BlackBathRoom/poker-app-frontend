@@ -34,7 +34,11 @@ export const useGameControl = (gameId: string) => {
 
     const startGame = () => {
         if (!userQuery.data || !gameQuery.data) return;
-        const updateInfo = startGameFn();
+        const updateInfo = startGameFn(userQuery.data, gameQuery.data.currentBet);
+        if (!updateInfo) return;
+
+        updateUserInfo(updateInfo.sbUser.id, { chip: updateInfo.sbUser.chip });
+        updateUserInfo(updateInfo.bbUser.id, { chip: updateInfo.bbUser.chip });
         userMutate.mutate({
             ids: userQuery.data.map((user) => user.id),
             userInfo: updateInfo.userInfo,
