@@ -1,52 +1,45 @@
 import { useState } from "react";
 
-import { Game } from "../../game/Game";
-import { SettingMode } from "./types";
+import type { UserInfoWithId } from "../../game/types";
+import type { SettingMode } from "./types";
+import type { WrapperFn } from "../../hook/useModal";
 import Settings from "./Settings";
 import ModalFrame from "../Modal/ModalFrame";
 import DBChange from "./DBChangeModal/DBChange";
 import RateChangeForm from "./RateChangeForm/RateChangeForm";
 
+
 type Props = {
-    game: Game;
-    closeModal: () => void;
+    users: Pick<UserInfoWithId, "name" | "role">[];
+    rate: number;
+    updateFn: {
+        changeRole: (newDBIndex: number) => void;
+        changeRate: (rate: number) => void;
+    }
+    closeModal: WrapperFn;
 };
 
-const SettingModal: React.FC<Props> = ({ game, closeModal }) => {
+const SettingModal: React.FC<Props> = ({
+    users,
+    rate,
+    updateFn: { changeRole, changeRate },
+    closeModal
+}) => {
     const [content, setContent] = useState<React.ReactNode | null>(null);
-
-    const userInfos = game.userManager.users.map((user) => {
-        const info = user.userInfo
-        
-        return ({
-            name: info.name,
-            role: info.role,
-        })
-    });
-
-    const handleSetRole = (index: number) => {
-        game.userManager.setRole(index);
-        closeModal();
-    }
-
-    const handleSetRate = (rate: number) => {
-        game.smallBlind = rate;
-        closeModal();
-    }
 
     const ChangeContent = (content: SettingMode) => {
         if (content === "ChangeDB") {
-            setContent(<DBChange users={userInfos} handleSetRole={handleSetRole} />);
+            setContent(<DBChange users={users} handleSetRole={(i) => closeModal(changeRole, i)} />);
         } else if (content === "ChangeRate") {
-            setContent(<RateChangeForm rate={game.smallBlind} handleSetRate={handleSetRate} />);
+            setContent(<RateChangeForm rate={rate} handleSetRate={(rate) => closeModal(changeRate, rate)} />);
         }
     }
 
     return (
         <ModalFrame modalName="Setting" closeModal={closeModal}>
             {content
-            ? content
-            : <Settings changeContent={ChangeContent} />
+                ? content
+                : <Settings changeContent={ChangeContent} />
             }
         </ModalFrame>
     );
