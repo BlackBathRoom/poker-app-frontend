@@ -16,7 +16,22 @@ const CircleText: React.FC<Props> = ({ text }) => {
 
     return (
         <div className="h-fit w-fit relative">
-            
+            <style>
+                {`
+                    @keyframes circleSpin {
+                        0% {
+                            transform: rotate(0deg);
+                        }
+                        100% {
+                            transform: rotate(360deg);
+                        }
+                    }
+
+                    .animate-circle-spin {
+                        animation: circleSpin 10s linear infinite;
+                    }
+                `}
+            </style>
 
             <svg
                 viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
