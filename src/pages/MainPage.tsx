@@ -6,7 +6,6 @@ import { FIXED_GAME_ID } from "../config";
 import { useGame } from "../hook/useGame";
 import { useModal } from "../hook/useModal";
 import { useUserContext } from "../hook/useUserContext";
-import { deleteUserInfo } from "../api/users/functions";
 import ActionBtn from "../components/Main/ActionBtn";
 import ActionModal from "../components/Main/ActionModal/ActionModal";
 import GameInfo from "../components/GameInfo/GameInfo";
@@ -17,7 +16,7 @@ import KickUserBtn from "../components/Admin/KickUserBtn";
 
 
 const MainPage: React.FC = () => {
-    const { id } = useUserContext();
+    const { id, setId } = useUserContext();
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
@@ -29,14 +28,15 @@ const MainPage: React.FC = () => {
         data: { user, game },
         isPending,
         isError,
-        action
+        action,
+        handleRemove,
     } = useGame(id as string, FIXED_GAME_ID);
     const { Modal, openModal, closeModal } = useModal();
 
     useEffect(() => {
         const handleBeforeUnload = async (e: BeforeUnloadEvent) => {
             e.preventDefault();
-            if (id) await deleteUserInfo(id as string);
+            if (id) Remove()
         };
         window.addEventListener("beforeunload", handleBeforeUnload);
         return () => window.removeEventListener("beforeunload", handleBeforeUnload);
@@ -44,6 +44,11 @@ const MainPage: React.FC = () => {
 
     const handleReload = () => {
         queryClient.invalidateQueries();
+    };
+
+    const Remove = () => {
+        handleRemove();
+        setId(null);
     };
 
     if (isPending) return <Loading />;
@@ -62,7 +67,7 @@ const MainPage: React.FC = () => {
                     <div className="flex flex-col items-center gap-10">
                         <div className="w-full flex justify-between">
                             <ReloadButton onReload={handleReload} />
-                            <KickUserBtn deleteUser={() => closeModal}/>
+                            <KickUserBtn deleteUser={Remove}/>
                         </div>
                         <GameInfo potSize={game.pot} rate={game.currentBet} />
                         <UserInfoLabel
