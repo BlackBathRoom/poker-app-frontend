@@ -5,14 +5,10 @@ type Props = {
 const CircleText: React.FC<Props> = ({ text }) => {
     const textLength = text.length;
     const textArray = [...text];
-    const radius = 250; // 半径を250pxに設定（これにより文字が十分に収まるようにする）
-    const circleLength = radius * 2 * Math.PI; // 円周を計算
-
-    // viewBox のサイズを動的に設定
-    const viewBoxSize = radius * 2 + 50; // 半径の2倍に少し余裕を加えたサイズ
-
-    // 文字間隔を調整して、長いテキストが切れないようにする
-    const textSpacing = circleLength / textLength * 1.4; // 文字間隔を少し広げて調整
+    const radius = 300; 
+    const circleLength = radius * 2 * Math.PI;
+    const viewBoxSize = radius * 2 + 50;
+    const textSpacing = circleLength / textLength; 
 
     return (
         <div className="h-fit w-fit relative">
@@ -46,7 +42,7 @@ const CircleText: React.FC<Props> = ({ text }) => {
                 <text fontSize="36" fill="white">
                     <textPath href="#circlePath" textLength={circleLength}>
                         {textArray.map((char, index) => (
-                            <tspan key={index} dx={textSpacing}> {/* 文字間隔を調整 */}
+                            <tspan key={index} dx={textSpacing}>
                                 {char}
                             </tspan>
                         ))}
