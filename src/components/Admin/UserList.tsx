@@ -16,7 +16,7 @@ const UserList: React.FC<Props> = ({ users, updateUserInfo, deleteUser }) => {
                 {users.map((user) => (
                     <li
                         key={user.id} 
-                        className="flex justify-between w-full px-20 py-2 text-white sm:text-xl md:text-2xl lg:text-3xl border-b border-gray-600 "
+                        className="flex justify-between w-full px-2 py-2 text-white sm:px-10 sm:text-xl md:px-20 md:text-2xl lg:text-3xl border-b border-gray-600 "
                     >
                         <div className="flex justify-center">
                             <UserEdit
