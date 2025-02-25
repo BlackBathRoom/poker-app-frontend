@@ -4,7 +4,6 @@ import ModalFrame from "../Modal/ModalFrame";
 import GameStartBtn from "./GameCtlBtn/GameStartBtn";
 import GameEndBtn from "./GameCtlBtn/GameEndBtn";
 import NextStepBtn from "./GameCtlBtn/NextStepBtn";
-import KickUserBtn from "./KickUserBtn";
 
 
 type Props = {
@@ -39,9 +38,6 @@ const GameControl: React.FC<Props> = ({
                     <GameStartBtn startGame={() => closeModal(startGame)} />
                 )}
                 <GameEndBtn users={users} endGame={(id) => closeModal(endGame, id)} />
-
-                //キックボタン追加
-                <KickUserBtn users={users} />
             </ModalFrame>
         </Modal>
         </>
