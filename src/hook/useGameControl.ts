@@ -5,7 +5,8 @@ import {
     nextStep as nextStepFn,
     endGame as endGameFn,
 } from "../game/gameCtl";
-import type { UserInfo } from "../game/types";
+import { changeRole as changeRoleFn } from "../game/changeRole";
+import type { GameStatus, UserInfo } from "../game/types";
 
 
 export const useGameControl = (gameId: string) => {
@@ -27,9 +28,17 @@ export const useGameControl = (gameId: string) => {
         userMutate.mutate({ ids: [id], userInfo });
     };
 
+    const updateGameInfo = (gameStatus: Partial<GameStatus>) => {
+        gameMutate.mutate(gameStatus);
+    };
+
     const startGame = () => {
         if (!userQuery.data || !gameQuery.data) return;
-        const updateInfo = startGameFn();
+        const updateInfo = startGameFn(userQuery.data, gameQuery.data.currentBet);
+        if (!updateInfo) return;
+
+        updateUserInfo(updateInfo.sbUser.id, { chip: updateInfo.sbUser.chip });
+        updateUserInfo(updateInfo.bbUser.id, { chip: updateInfo.bbUser.chip });
         userMutate.mutate({
             ids: userQuery.data.map((user) => user.id),
             userInfo: updateInfo.userInfo,
@@ -68,15 +77,35 @@ export const useGameControl = (gameId: string) => {
     const handleDeleteUser = (id: string) => {
         userDeleteMutate.mutate(id)
     };
+    
+    const changeRole = (newDBIndex: number) => {
+        if (!data.users) return;
+        const prevUsers = data.users.map((user) => user.role);
+        const newUsers = changeRoleFn({ users: prevUsers, newDBIndex });
+        const reWriteUsers = data.users.map((user, i) => {
+            if (user.role !== newUsers[i]) {
+                return { id: user.id, role: newUsers[i] };
+            };
+        }).filter((user) => user !== undefined);
+
+        reWriteUsers.forEach((user) => {
+            userMutate.mutate({
+                ids: [user.id],
+                userInfo: { role: user.role },
+            });
+        });
+    };
 
     return { 
         isPending,
         isError,
         data,
         updateUserInfo,
+        updateGameInfo,
         startGame,
         nextStep,
         endGame,
         handleDeleteUser,
+        changeRole,
     };
 };

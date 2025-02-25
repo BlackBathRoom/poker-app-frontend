@@ -70,11 +70,7 @@ const MainPage: React.FC = () => {
                             <KickUserBtn deleteUser={Remove}/>
                         </div>
                         <GameInfo potSize={game.pot} rate={game.currentBet} />
-                        <UserInfoLabel
-                            userName={user.name}
-                            chips={user.chip}
-                            isPlaying={user.isPlaying}
-                        />
+                        <UserInfoLabel userInfo={user} />
                     </div>
                     <div className="flex flex-col items-center gap-4">
                         <ActionBtn
