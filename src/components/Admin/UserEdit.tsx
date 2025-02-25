@@ -8,9 +8,14 @@ import UserEditModal from "./UserEditModal";
 type Props = {
     userInfo: Pick<UserInfo, "name" | "chip">;
     updateUserInfo: (userInfo: Partial<UserInfo>) => void;
-}
+    deleteUser: () => void;
+};
 
-const UserEdit: React.FC<Props> = (props) => {
+const UserEdit: React.FC<Props> = ({
+    userInfo,
+    updateUserInfo,
+    deleteUser,
+}) => {
     const { Modal, openModal, closeModal } = useModal();
 
     return (
@@ -23,8 +28,9 @@ const UserEdit: React.FC<Props> = (props) => {
         />
         <Modal>
             <UserEditModal
-                userInfo={props.userInfo}
-                updateUserInfo={props.updateUserInfo}
+                userInfo={userInfo}
+                updateUserInfo={updateUserInfo}
+                deleteUser={deleteUser}
                 closeModal={closeModal}
             />
         </Modal>
