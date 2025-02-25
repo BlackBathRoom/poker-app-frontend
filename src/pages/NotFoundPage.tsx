@@ -19,7 +19,7 @@ const NotFound: React.FC = () => {
     }, [index]);
 
     return (
-        <div className="relative flex items-center justify-center w-full h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white">
+        <div className="relative flex items-center justify-center w-full h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-full z-0">
                 <RandomImage />
             </div>
