@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HorieDieFace from "../../../public/Horie-die-face.png";
+import HorieDieFace from "/Horie-die-face.png";
 
 type Position = {
     left: number;
