@@ -3,10 +3,31 @@ export default {
   content: [
     "./index.html",
     "./src/**/*.{js,jsx,ts,tsx}",
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
-  theme: {
-    extend: {},
-  },
+    theme: {
+        extend: {
+            animation: {
+                "circle-spin": "circleSpin 10s linear infinite",
+                'rotate': 'rotateImage 15s linear infinite',
+            },
+            keyframes: {
+                circleSpin: {
+                    "0%": { transform: "rotate(0deg)" },
+                    "100%": { transform: "rotate(360deg)" },
+                },
+                rotateImage: {
+                    '0%': {
+                      transform: 'rotate(0deg)',
+                    },
+                    '100%': {
+                      transform: 'rotate(360deg)',
+                    },          
+                },
+            },
+        },
+    },
   plugins: [],
 }
 
