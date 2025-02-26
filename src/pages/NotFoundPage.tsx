@@ -31,12 +31,12 @@ const NotFound: React.FC = () => {
                 <RotatingImage />
             </div>
             <div className="relative flex flex-col items-center justify-center w-[80vw] h-[80vh] z-10">
-                <h1 className="text-9xl font-extrabold tracking-widest text-white drop-shadow-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 md:text-8xl sm:text-7xl">
+                <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-9xl font-extrabold tracking-widest text-white drop-shadow-lg absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                     404
                 </h1>
-                <CircleText text="お探しのページは見つかりませんでした。" radius={250} fontSize={45}>
-                    <div className="flex items-center justify-center w-full mt-[150px]">
-                        <h2 className="text-center text-4xl font-bold text-white md:text-3xl sm:text-2xl">
+                <CircleText text="お探しのページは見つかりませんでした。">
+                    <div className="flex items-center justify-center w-full mt-[60px] sm:mt-[75px] md:mt-[100px] lg:mt-[200px] z-20">
+                        <h2 className="text-center text-2xl sm:text-3xl md:text-3xl lg:text-5xl font-bold text-white">
                             {displayText}
                         </h2>
                     </div>
