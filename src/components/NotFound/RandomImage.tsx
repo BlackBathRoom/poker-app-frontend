@@ -10,10 +10,8 @@ const RandomImage: React.FC = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             setImageCount((prev) => prev + 1);
-
             let x, y;
             do {
-                
                 x = Math.random() * 80 + 10;
                 y = Math.random() * 80 + 10;
             } while (

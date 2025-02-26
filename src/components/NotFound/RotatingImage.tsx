@@ -25,21 +25,13 @@ const RotatingImage: React.FC = () => {
                     className={`absolute top-0 right-0 w-80 h-80 flex items-center justify-center animate-rotate ${
                         rotate ? "rotate" : ""
                     }`}
-                    style={{ position: "relative" }}
                 >
-                    
                     {Array.from({ length: 4 }).map((_, index) => (
                         <div
                             key={index}
-                            className="absolute"
+                            className="absolute w-[80px] h-[80px] bg-[url('Itsuki.png')] bg-cover bg-center rounded-full"
                             style={{
                                 transform: `rotate(${(index * 90)}deg) translateX(100px) rotate(${-(index * 90)}deg)`,
-                                width: "80px",
-                                height: "80px",
-                                backgroundImage: "url('/Itsuki.png')",
-                                backgroundSize: "cover",
-                                backgroundPosition: "center",
-                                borderRadius: "50%",
                             }}
                         />
                     ))}
