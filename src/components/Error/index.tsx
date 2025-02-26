@@ -8,8 +8,8 @@ type Position = {
 
 const generateRandomPosition = (): Position => {
     return {
-        left: Math.random() * 75 + 10,
-        top: Math.random() * 75 + 10,  
+        left: Math.random() * 70 + 5, 
+        top: Math.random() * 70 + 5,  
     };
 };
 
@@ -26,10 +26,10 @@ const ErrorPage: React.FC = () => {
 
     return (
         <div 
-            className="relative min-h-screen bg-gray-100"
+            className="relative h-full bg-gray-100"
             onClick={handleImageClick} 
         >
-            <div className="z-10 relative flex flex-col items-center justify-center min-h-screen pointer-events-none">
+            <div className="z-10 relative flex flex-col items-center justify-center h-full pointer-events-none">
                 <h1 className="text-3xl font-bold text-red-500 mb-4">
                     データの取得に失敗しました
                 </h1>
@@ -45,8 +45,8 @@ const ErrorPage: React.FC = () => {
                             position: "absolute",
                             left: `${pos.left}%`,
                             top: `${pos.top}%`,
-                            width: "80px", 
-                            height: "80px",
+                            width: "90px",
+                            height: "90px",
                         }}
                         className="cursor-pointer transition-transform duration-300"
                     />
