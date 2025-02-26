@@ -1,16 +1,17 @@
 import { FIXED_GAME_ID } from "../config";
 import { useGameControl } from "../hook/useGameControl";
+import { useModal } from "../hook/useModal";
 import UserList from "../components/Admin/UserList";
 import GameControl from "../components/Admin/GameControl";
 import Loading from "../components/Loading/Loading";
-import { useModal } from "../hook/useModal";
 import SettingModal from "../components/SettingModal/SettingModal";
 import GameInfo from "../components/GameInfo/GameInfo";
+import ErrorPage from "../components/Error";
 
 
 const AdminPage: React.FC = () => {
     const {
-        data: { users, game},
+        data: { users, game },
         isPending,
         isError,
         updateUserInfo,
@@ -28,8 +29,9 @@ const AdminPage: React.FC = () => {
     };
 
     if (isPending) return <Loading />;
-    if (isError) return <div>エラーが発生しました</div>;
-    if (!users || !game) return <div>データがありません</div>;
+    if ((isError) || (!users || !game)) {
+        return <ErrorPage />;
+    }
 
     return (
         <div className="w-full h-full p-3 flex flex-col max-w-5xl justify-center items-center m-auto sm:p-5">

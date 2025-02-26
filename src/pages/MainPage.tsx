@@ -13,6 +13,7 @@ import UserInfoLabel from "../components/Main/UserInfoLabel";
 import Loading from "../components/Loading/Loading";
 import ReloadButton from "../components/ReloadButton/ReloadButton"; 
 import KickUserBtn from "../components/Admin/KickUserBtn";
+import ErrorPage from "../components/Error";
 
 
 const MainPage: React.FC = () => {
@@ -52,8 +53,9 @@ const MainPage: React.FC = () => {
     };
 
     if (isPending) return <Loading />;
-    if (isError) return <div>Error</div>;
-    if (!user || !game) return <div>No data</div>;
+    if ((isError) || (!user || !game)) {
+        return <ErrorPage />;
+    }
 
     return (
         <div className="h-full w-full flex flex-col items-center justify-center">

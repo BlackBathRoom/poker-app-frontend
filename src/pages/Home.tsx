@@ -3,19 +3,16 @@ import { useGetGameInfo } from "../api/gameInfo";
 import { useGetAllUser } from "../api/users";
 import GameInfo from "../components/GameInfo/GameInfo";
 import Loading from "../components/Loading/Loading";
+import ErrorPage from "../components/Error";
+
 
 const Home: React.FC = () => {
     const userQuery = useGetAllUser();
     const gameInfoQuery = useGetGameInfo(FIXED_GAME_ID);
 
-    if (userQuery.isPending || gameInfoQuery.isPending) {
-        return <Loading />;
-    }
-    if (userQuery.isError || gameInfoQuery.isError) {
-        return <div>Error</div>;
-    }
-    if (!userQuery.data || !gameInfoQuery.data) {
-        return <div>No data</div>;
+    if (userQuery.isPending || gameInfoQuery.isPending) return <Loading />;
+    if ((userQuery.isError || gameInfoQuery.isError) || (!userQuery.data || !gameInfoQuery.data)) {
+        return <ErrorPage />;
     }
 
     return (
