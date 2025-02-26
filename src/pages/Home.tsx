@@ -4,7 +4,6 @@ import { useGetAllUser } from "../api/users";
 import GameInfo from "../components/GameInfo/GameInfo";
 import Loading from "../components/Loading/Loading";
 
-
 const Home: React.FC = () => {
     const userQuery = useGetAllUser();
     const gameInfoQuery = useGetGameInfo(FIXED_GAME_ID);
