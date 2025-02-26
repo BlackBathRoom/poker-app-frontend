@@ -9,17 +9,17 @@ const CircleText: React.FC<Props> = ({ children, text }) => {
     const radius = useMemo(() => {
         if (typeof window !== "undefined") {
             const width = window.innerWidth;
-            if (width >= 768) return 250; 
-            if (width >= 640) return 150; 
-            return 130; 
+            if (width >= 768) return 250;
+            if (width >= 640) return 150;
+            return 130;
         }
         return 100;
     }, []);
-    
+
     const fontSize = useMemo(() => {
-        if (radius >= 250) return 45; 
-        if (radius >= 150) return 30; 
-        return 20; 
+        if (radius >= 250) return 45;
+        if (radius >= 150) return 30;
+        return 20;
     }, [radius]);
 
     const circumference = radius * 2 * Math.PI;
@@ -55,7 +55,7 @@ const CircleText: React.FC<Props> = ({ children, text }) => {
                     </textPath>
                 </text>
             </svg>
-            <div className="absolute flex items-center justify-center w-full h-full">
+            <div className="absolute flex flex-col items-center justify-center w-full h-full text-center">
                 {children}
             </div>
         </div>
