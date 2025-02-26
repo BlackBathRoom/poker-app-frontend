@@ -39,7 +39,12 @@ const ErrorPage: React.FC = () => {
                         src={HorieDieFace}
                         alt="Horie die face"
                         onClick={handleImageClick}
-                        className={`absolute cursor-pointer transition-transform duration-300 left-[${pos.left}%] top-[${pos.top}%]`}
+                        style={{
+                            position: "absolute",
+                            left: `${pos.left}%`,
+                            top: `${pos.top}%`
+                        }}
+                        className="cursor-pointer transition-transform duration-300"
                     />
                 );
             })}
