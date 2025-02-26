@@ -8,7 +8,7 @@ type Position = {
 
 const generateRandomPosition = (): Position => {
     return {
-        left: Math.random() * 75 + 10, 
+        left: Math.random() * 75 + 10,
         top: Math.random() * 75 + 10,  
     };
 };
@@ -25,8 +25,11 @@ const ErrorPage: React.FC = () => {
     const images = Array.from({ length: imageCount });
 
     return (
-        <div className="relative min-h-screen bg-gray-100">
-            <div className="z-10 relative flex flex-col items-center justify-center min-h-screen">
+        <div 
+            className="relative min-h-screen bg-gray-100"
+            onClick={handleImageClick} 
+        >
+            <div className="z-10 relative flex flex-col items-center justify-center min-h-screen pointer-events-none">
                 <h1 className="text-3xl font-bold text-red-500 mb-4">
                     データの取得に失敗しました
                 </h1>
@@ -38,13 +41,12 @@ const ErrorPage: React.FC = () => {
                         key={index}
                         src={HorieDieFace}
                         alt="Horie die face"
-                        onClick={handleImageClick}
                         style={{
                             position: "absolute",
                             left: `${pos.left}%`,
                             top: `${pos.top}%`,
-                            width: "50px", 
-                            height: "50px",
+                            width: "80px", 
+                            height: "80px",
                         }}
                         className="cursor-pointer transition-transform duration-300"
                     />
