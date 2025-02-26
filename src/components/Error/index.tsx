@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HorieDieFace from "./public/Horie-die-face.png";
+import HorieDieFace from "../../../public/Horie-die-face.png";
 
 type Position = {
     left: number;
@@ -8,8 +8,8 @@ type Position = {
 
 const generateRandomPosition = (): Position => {
     return {
-        left: Math.random() * 90, 
-        top: Math.random() * 90,
+        left: Math.random() * 75 + 10, 
+        top: Math.random() * 75 + 10,  
     };
 };
 
@@ -32,7 +32,7 @@ const ErrorPage: React.FC = () => {
                 </h1>
             </div>
             {images.map((_, index) => {
-                const pos = positions[index] || { left: 0, top: 0 };
+                const pos = positions[index] || { left: 50, top: 50 };
                 return (
                     <img
                         key={index}
@@ -42,7 +42,9 @@ const ErrorPage: React.FC = () => {
                         style={{
                             position: "absolute",
                             left: `${pos.left}%`,
-                            top: `${pos.top}%`
+                            top: `${pos.top}%`,
+                            width: "50px", 
+                            height: "50px",
                         }}
                         className="cursor-pointer transition-transform duration-300"
                     />
