@@ -72,6 +72,9 @@ export const useGameControl = (gameId: string) => {
             userInfo: commonData,
         });
         gameMutate.mutate(gameStatus);
+
+        const newDBIndex = userQuery.data.findIndex((user) => user.role === "DB");
+        changeRole(newDBIndex + 1);
     };
 
     const handleDeleteUser = (id: string) => {
