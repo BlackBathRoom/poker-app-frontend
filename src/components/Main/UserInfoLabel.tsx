@@ -10,7 +10,7 @@ const UserInfoLabel: React.FC<Props> = ({ userInfo }) => {
     return (
         <div className="flex flex-col gap-4 p-8 bg-white/40 items-center rounded-md shadow">
             <div className="text-2xl flex gap-2 items-center sm:text-3xl md:text-4xl lg:text-4xl">
-                <RoleIcon role="" />
+                <RoleIcon role={userInfo.role} />
                 <span className="font-bold text-black pb-1">{userInfo.name}</span>
             </div>
             <p className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl">
