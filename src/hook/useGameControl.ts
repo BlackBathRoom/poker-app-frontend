@@ -1,5 +1,6 @@
 import { useGetGameInfo, usePutGameInfo } from "../api/gameInfo";
 import { useDeleteUserInfo, useGetAllUserWithId, usePutSelectedUserInfo } from "../api/users";
+import { useErrorModal } from "./useErrorModal";
 import {
     startGame as startGameFn,
     nextStep as nextStepFn,
@@ -16,6 +17,8 @@ export const useGameControl = (gameId: string) => {
     const userMutate = usePutSelectedUserInfo();
     const userDeleteMutate = useDeleteUserInfo();
     const gameMutate = usePutGameInfo(gameId);
+
+    const { openErrorModal } = useErrorModal();
 
     const isPending = userQuery.isPending || gameQuery.isPending;
     const isError = userQuery.isError || gameQuery.isError;
@@ -35,7 +38,10 @@ export const useGameControl = (gameId: string) => {
     const startGame = () => {
         if (!userQuery.data || !gameQuery.data) return;
         const updateInfo = startGameFn(userQuery.data, gameQuery.data.currentBet);
-        if (!updateInfo) return;
+        if (!updateInfo) {
+            openErrorModal(new Error("ゲームを開始できません"));
+            return;
+        }
 
         updateUserInfo(updateInfo.sbUser.id, { chip: updateInfo.sbUser.chip });
         updateUserInfo(updateInfo.bbUser.id, { chip: updateInfo.bbUser.chip });
